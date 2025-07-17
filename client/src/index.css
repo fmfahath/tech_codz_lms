@@ -11,3 +11,7 @@
 @theme {
     --font-roboto: 'Roboto', sans-serif;
 }
+
+.flex-center {
+    @apply flex items-center;
+}
