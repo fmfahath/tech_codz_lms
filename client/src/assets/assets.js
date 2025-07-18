@@ -17,6 +17,8 @@ import { MapPin } from "lucide-react";
 import { Database } from "lucide-react";
 import { PanelsTopLeft } from "lucide-react";
 import { PanelTop } from "lucide-react";
+import white_logo from "./white_logo.png";
+import black_logo from "./black_logo.png";
 
 export const Menus = [
     {
@@ -148,3 +150,5 @@ export const Menus = [
         name: "Contact",
     },
 ];
+
+export const logo = { white_logo, black_logo }
