@@ -1,8 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { logo, Menus } from '../../assets/assets.js'
 import { ChevronDown } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 const Navbar = () => {
+
+    const [isHover, setIsHover] = useState(false);
+    const [hoveredIndex, setHoveredIndex] = useState(null);
+
+    const toggleHoverMenu = () => {
+        setIsHover(!isHover);
+    }
+
+    //animation variants
+    const subMenuAnimate = {
+        enter: {
+            opacity: 1,
+            rotateX: 0,
+            transition: {
+                duration: 0.5,
+            },
+            display: "block",
+        },
+        exit: {
+            opacity: 0,
+            rotateX: -15,
+            transition: {
+                duration: 0.5,
+            },
+            display: "none",
+        }
+    }
+
+
+
     return (
         <div>
             <header className='h-16 text-[15px] fixed inset-0 flex-center'>
@@ -15,14 +46,20 @@ const Navbar = () => {
                     {/* menu */}
                     <ul className='hidden lg:flex items-center justify-between gap-5'>
                         {Menus.map((menu, index) => (
-                            <li key={index} className='group/link'>
-                                <span className='flex  gap-1 cursor-pointer px-3 py-1 rounded-xl hover:bg-white/10'>
+                            <motion.li key={index} className='group/link'
+                                onHoverStart={() => setHoveredIndex(index)}
+                                onHoverEnd={() => setHoveredIndex(null)}>
+                                <span className='flex gap-1 cursor-pointer px-3 py-1 rounded-xl hover:bg-white/10'>
                                     {menu.name}
                                     {menu?.subMenu && menu.subMenu.length > 0 && <ChevronDown className='mt-[0.6px] group-hover/link:rotate-180 duration-200' />}
                                 </span>
 
                                 {menu?.subMenu && (
-                                    <div className='sub-menu'>
+                                    <motion.div className='sub-menu'
+                                        initial="exit"
+                                        animate={hoveredIndex === index ? "enter" : "exit"}
+                                        variants={subMenuAnimate}
+                                    >
                                         <div className={`grid gap-7 ${menu.gridCols === 3 ? 'grid-cols-3' : menu.gridCols === 2 ? 'grid-cols-2' : 'grid-cols-1'} `}>
                                             {menu?.subMenu?.map((subMenu, index) => (
                                                 <div key={index} className='relative cursor-pointer'>
@@ -37,9 +74,9 @@ const Navbar = () => {
                                                 </div>
                                             ))}
                                         </div>
-                                    </div>
+                                    </motion.div>
                                 )}
-                            </li>
+                            </motion.li>
                         ))}
                     </ul>
 
