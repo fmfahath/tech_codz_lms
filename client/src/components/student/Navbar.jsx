@@ -55,7 +55,7 @@ const Navbar = () => {
                 <nav className='px-3.5 flex items-center justify-between gap-5 w-full mx-auto bg-black/85 text-white '>
                     {/* logo */}
                     <div>
-                        <img src={logo.white_logo} alt="logo-img" className='w-25 h-15' />
+                        <img src={logo.white_logo} alt="logo-img" className='w-25 h-15 p-1' />
                     </div>
 
                     {/* menu */}
