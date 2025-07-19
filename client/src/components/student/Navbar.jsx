@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { logo, Menus } from '../../assets/assets.js'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, Icon, Menu, X } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const Navbar = () => {
 
     const [isHover, setIsHover] = useState(false);
     const [hoveredIndex, setHoveredIndex] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
+    const [clicked, setClicked] = useState(null)
 
-    const toggleHoverMenu = () => {
-        setIsHover(!isHover);
+    const toggleDrawer = () => {
+        setIsOpen(!isOpen);
     }
 
     //animation variants
@@ -83,7 +85,41 @@ const Navbar = () => {
                     {/* sign in button/ */}
                     <div className='flex items-center gap-x-5'>
                         <button className='bg-white/10 z-[999] relative px-3 py-1.5 shadow rounded-xl flex-center cursor-pointer hover:bg-white/20'>Sign In</button>
+                        {/* mobile menu */}
+                        <div className='lg:hidden relative z-[999]'>
+                            <button className='cursor-pointer ' onClick={toggleDrawer}>{isOpen ? <X /> : <Menu />}</button>
+                            <div className='fixed left-0 right-0 top-15  overflow-y-auto h-full bg-[#18181A] backdrop-blur text-white p-6'>
+                                <ul>
+                                    {Menus?.map(({ name, subMenu }, index) => {
+                                        const hasSubMenu = subMenu && subMenu.length > 0;
+                                        const isClicked = clicked === index;
+
+                                        return (
+                                            <li key={index}>
+                                                <span className='flex items-center justify-between gap-2 cursor-pointer px-3 py-2 rounded-xl hover:bg-white/10 relative'
+                                                    onClick={() => setClicked(isClicked ? null : index)}
+                                                >
+                                                    {name}
+                                                    {hasSubMenu && <ChevronDown className={`ml-auto ${isClicked && "rotate-180"} duration-200`} />}
+                                                </span>
+                                                {hasSubMenu && (
+                                                    <ul className='ml-5'>
+                                                        {subMenu?.map(({ name, icon: Icon }) => (
+                                                            <li key={name} className='flex items-center gap-2 p-1 cursor-pointer hover:bg-white/10 rounded-md group/submenu'>
+                                                                <Icon className='group-hover/submenu:text-black/80 group-hover/submenu:bg-white rounded' />
+                                                                <span className='group-hover/submenu:text-white/80'>{name}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                )}
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
+
                 </nav>
             </header>
         </div>
