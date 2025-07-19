@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { logo, Menus } from '../../assets/assets.js'
-import { ChevronDown, Icon, Menu, X } from 'lucide-react'
+import { ChevronDown, Menu, X } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const Navbar = () => {
@@ -12,6 +12,7 @@ const Navbar = () => {
 
     const toggleDrawer = () => {
         setIsOpen(!isOpen);
+        setClicked(null);
     }
 
     //animation variants
@@ -34,6 +35,18 @@ const Navbar = () => {
         }
     }
 
+    //mobile - subMenu variants
+    const mobileSubMenuAnimate = {
+        enter: {
+            height: "auto",
+            oveflow: "hidden"
+        },
+        exit: {
+            height: 0,
+            overflow: "hidden"
+        }
+    }
+
 
 
     return (
@@ -42,7 +55,7 @@ const Navbar = () => {
                 <nav className='px-3.5 flex items-center justify-between gap-5 w-full mx-auto bg-black/85 text-white '>
                     {/* logo */}
                     <div>
-                        <img src={logo.white_logo} alt="logo-img" className='w-25 h-15' />
+                        <img src={logo.white_logo} alt="logo-img" className='w-25 h-15 p-1' />
                     </div>
 
                     {/* menu */}
@@ -88,7 +101,11 @@ const Navbar = () => {
                         {/* mobile menu */}
                         <div className='lg:hidden relative z-[999]'>
                             <button className='cursor-pointer ' onClick={toggleDrawer}>{isOpen ? <X /> : <Menu />}</button>
-                            <div className='fixed left-0 right-0 top-15  overflow-y-auto h-full bg-[#18181A] backdrop-blur text-white p-6'>
+                            <motion.div
+                                className='fixed left-0 right-0 top-15  overflow-y-auto h-full bg-[#18181A] backdrop-blur text-white p-6'
+                                initial={{ x: "-100% " }}
+                                animate={{ x: isOpen ? 0 : "-100%" }}
+                            >
                                 <ul>
                                     {Menus?.map(({ name, subMenu }, index) => {
                                         const hasSubMenu = subMenu && subMenu.length > 0;
@@ -103,20 +120,25 @@ const Navbar = () => {
                                                     {hasSubMenu && <ChevronDown className={`ml-auto ${isClicked && "rotate-180"} duration-200`} />}
                                                 </span>
                                                 {hasSubMenu && (
-                                                    <ul className='ml-5'>
+                                                    <motion.ul
+                                                        className='ml-5'
+                                                        initial="exit"
+                                                        animate={isClicked ? "enter" : "exit"}
+                                                        variants={mobileSubMenuAnimate}
+                                                    >
                                                         {subMenu?.map(({ name, icon: Icon }) => (
                                                             <li key={name} className='flex items-center gap-2 p-1 cursor-pointer hover:bg-white/10 rounded-md group/submenu'>
-                                                                <Icon className='group-hover/submenu:text-black/80 group-hover/submenu:bg-white rounded' />
+                                                                <Icon className='group-hover/submenu:text-black/80 group-hover/submenu:bg-white rounded ' size={17} />
                                                                 <span className='group-hover/submenu:text-white/80'>{name}</span>
                                                             </li>
                                                         ))}
-                                                    </ul>
+                                                    </motion.ul>
                                                 )}
                                             </li>
                                         )
                                     })}
                                 </ul>
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
 
