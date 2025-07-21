@@ -19,6 +19,9 @@ import { PanelsTopLeft } from "lucide-react";
 import { PanelTop } from "lucide-react";
 import white_logo from "./white_logo.png";
 import black_logo from "./black_logo.png";
+import hero1 from "./hero1.png";
+import hero2 from "./hero2.png";
+import hero3 from "./hero3.png";
 
 export const Menus = [
     {
@@ -150,5 +153,23 @@ export const Menus = [
         name: "Contact",
     },
 ];
+
+export const heroSliderData = [
+    {
+        title: "React for Beginners",
+        subTitle: "Learn to build dynamic user interfaces and interactive web apps using one of the most popular JavaScript libraries.",
+        image: hero1
+    },
+    {
+        title: "Python for Data Science",
+        subTitle: "Master Python programming to analyze data, create visualizations, and uncover insights that drive smarter decisions.",
+        image: hero2
+    },
+    {
+        title: "AWS Cloud Practitioner",
+        subTitle: "Get a foundational understanding of cloud computing and AWS services to start your journey in the cloud industry.",
+        image: hero3
+    }
+]
 
 export const logo = { white_logo, black_logo }
