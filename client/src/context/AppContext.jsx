@@ -1,14 +1,14 @@
-import { createContext } from "react";
-
+import { createContext, useState } from "react";
+import { dummyCourses } from "../assets/assets";
 
 export const AppContext = createContext()
 
 export const AppCondextProvider = (props) => {
 
-    const test = "fahath"
+    const [allCourses, setAllCourses] = useState(dummyCourses);
 
     const value = {
-        test
+        allCourses, setAllCourses
     }
 
     return (
