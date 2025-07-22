@@ -156,20 +156,23 @@ export const Menus = [
 
 export const heroSliderData = [
     {
-        title: "React for Beginners",
-        subTitle: "Learn to build dynamic user interfaces and interactive web apps using one of the most popular JavaScript libraries.",
-        image: hero1
-    },
-    {
         title: "Python for Data Science",
         subTitle: "Master Python programming to analyze data, create visualizations, and uncover insights that drive smarter decisions.",
-        image: hero2
+        image: hero2,
+        bgColor: "bg-linear-to-bl from-violet-500 to-fuchsia-500"
+    },
+    {
+        title: "React for Beginners",
+        subTitle: "Learn to build dynamic user interfaces and interactive web apps using one of the most popular JavaScript libraries.",
+        image: hero1,
+        bgColor: "bg-linear-to-r from-cyan-500 to-blue-500"
     },
     {
         title: "AWS Cloud Practitioner",
         subTitle: "Get a foundational understanding of cloud computing and AWS services to start your journey in the cloud industry.",
-        image: hero3
-    }
+        image: hero3,
+        bgColor: "bg-linear-to-t from-sky-500 to-indigo-500"
+    },
 ]
 
 export const logo = { white_logo, black_logo }

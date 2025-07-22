@@ -50,7 +50,7 @@ const Navbar = () => {
 
 
     return (
-        <div>
+        <div className='relative z-999'>
             <header className='h-16 text-[15px] fixed inset-0 flex-center'>
                 <nav className='px-3.5 flex items-center justify-between gap-5 w-full mx-auto bg-black/85 text-white '>
                     {/* logo */}
