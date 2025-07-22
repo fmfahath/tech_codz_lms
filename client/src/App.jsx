@@ -10,6 +10,7 @@ import CourseList from "./pages/student/CourseList"
 import Home from "./pages/student/Home"
 import Player from "./pages/student/Player"
 import MyEnrollments from './pages/student/MyEnrollments'
+import Navbar from './components/student/Navbar'
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <div>
+      <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/course-list' element={<CourseList />} />

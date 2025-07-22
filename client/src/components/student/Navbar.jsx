@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { logo, Menus } from '../../assets/assets.js'
 import { ChevronDown, Menu, X } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
 
@@ -55,7 +56,7 @@ const Navbar = () => {
                 <nav className='px-3.5 flex items-center justify-between gap-5 w-full mx-auto bg-black/85 text-white '>
                     {/* logo */}
                     <div>
-                        <img src={logo.white_logo} alt="logo-img" className='w-25 h-15 p-1' />
+                        <Link to='/'><img src={logo.white_logo} alt="logo-img" className='w-25 h-15 p-1' /></Link>
                     </div>
 
                     {/* menu */}
