@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { Fragment, useContext, useEffect, useRef } from 'react'
 import Hero from '../../components/student/Hero'
 import SearchBar from '../../components/student/SearchBar'
 import { AppContext } from '../../context/AppContext'
@@ -6,6 +6,7 @@ import CourseCard from '../../components/student/CourseCard'
 import { RiArrowRightDoubleLine } from "react-icons/ri";
 import { RiArrowLeftDoubleLine } from "react-icons/ri";
 import { Link } from 'react-router-dom'
+import Testimonial from '../../components/student/Testimonial'
 
 const Home = () => {
 
@@ -92,7 +93,10 @@ const Home = () => {
                 </div>
             </section>
 
-
+            {/* testimonials */}
+            <section>
+                <Testimonial />
+            </section>
         </div>
     )
 }
