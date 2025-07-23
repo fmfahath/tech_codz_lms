@@ -7,7 +7,9 @@ export const AppCondextProvider = (props) => {
 
     const [allCourses, setAllCourses] = useState(dummyCourses);
 
-    const calculateRating = async (courseData) => {
+
+    //calculate course ratings----------------------------------------
+    const calculateRating = (courseData) => {
         if (courseData?.courseRatings && courseData?.courseRatings.length == 0) return 0;
 
         // let totalRating = 0;

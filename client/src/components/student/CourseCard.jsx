@@ -1,29 +1,36 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../../context/AppContext'
 import { Link } from 'react-router-dom'
+import { FaStar } from "react-icons/fa6";
+import { FaRegStar } from "react-icons/fa6";
+import { FaRegStarHalfStroke } from "react-icons/fa6";
 
 const CourseCard = ({ courseData }) => {
 
     const { calculateRating } = useContext(AppContext)
 
-    //rating starts
+
+    //rating stars
     const fullStar = Math.floor(calculateRating(courseData));
     const halfStar = calculateRating(courseData) % 1 >= 0.5 ? 1 : 0;
     const emptyStar = 5 - fullStar - halfStar;
 
     return (
-        <Link to={`/course/${courseData._id}`}>
+        <Link to={`/course/${courseData._id}`} className='block max-w-[300px] bg-white hover:bg-gray-50 border border-gray-200 rounded shadow hover:shadow-lg p-2'>
             {/* course thumbnail */}
-            <div>
-                <img src={courseData.courseThumbnail} alt="" />
+            <div className='w-full'>
+                <img src={courseData.courseThumbnail} alt="" className='rounded' />
             </div>
             {/* course details */}
-            <div>
-                <h1>{courseData.courseTitle}</h1>
-                <p>Course by: {courseData.educator?.name ? courseData.educator?.name : "Verified Instructors"} </p>
-                <div>
-
+            <div className='mt-2'>
+                <h1 className='text-lg font-semibold'>{courseData.courseTitle}</h1>
+                <p className='text-sm text-gray-600'>Course by: {courseData.educator?.name ? courseData.educator?.name : "Verified Instructors"} </p>
+                <div className='flex items-center gap-1 my-1 text-yellow-500'>
+                    {[...Array(fullStar)].map((_, i) => <FaStar key={i} />)}
+                    {halfStar > 0 && <FaRegStarHalfStroke />}
+                    {[...Array(emptyStar)].map((_, i) => <FaRegStar key={i} />)}
                 </div>
+                <p className='text-lg font-light'>$ {courseData.coursePrice}</p>
             </div>
         </Link>
     )
