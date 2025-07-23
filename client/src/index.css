@@ -14,7 +14,7 @@
     }
 
     .btn-bg {
-        @apply bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 text-white text-sm md:text-[16px] rounded-sm cursor-pointer
+        @apply bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 text-white text-sm md:text-[16px] rounded-sm cursor-pointer shadow hover:shadow-md
     }
 }
 

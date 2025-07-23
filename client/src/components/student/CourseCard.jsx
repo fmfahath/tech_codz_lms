@@ -16,7 +16,7 @@ const CourseCard = ({ courseData }) => {
     const emptyStar = 5 - fullStar - halfStar;
 
     return (
-        <Link to={`/course/${courseData._id}`} className='flex-shrink-0  max-w-[150px] md:max-w-[300px] bg-white hover:bg-gray-50 border border-gray-200 rounded shadow hover:shadow-lg p-2'>
+        <Link to={`/course/${courseData._id}`} className='flex-shrink-0  max-w-[150px] md:max-w-[300px] bg-white hover:bg-gradient-to-b hover:from-cyan-100 hover:to-purple-100 transition duration-300  border border-gray-200 rounded shadow hover:shadow-lg p-2'>
             {/* course thumbnail */}
             <div className='w-full'>
                 <img src={courseData.courseThumbnail} alt="" className='rounded' />

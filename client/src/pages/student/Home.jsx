@@ -5,6 +5,7 @@ import { AppContext } from '../../context/AppContext'
 import CourseCard from '../../components/student/CourseCard'
 import { RiArrowRightDoubleLine } from "react-icons/ri";
 import { RiArrowLeftDoubleLine } from "react-icons/ri";
+import { Link } from 'react-router-dom'
 
 const Home = () => {
 
@@ -12,6 +13,7 @@ const Home = () => {
     const { allCourses } = useContext(AppContext)
 
     const scrollRight = () => {
+
         if (scrollRef.current) {
             scrollRef.current.scrollBy({
                 left: 300,
@@ -21,6 +23,7 @@ const Home = () => {
     }
 
     const scrollLeft = () => {
+
         if (scrollRef.current) {
             scrollRef.current.scrollBy({
                 left: -300,
@@ -28,8 +31,6 @@ const Home = () => {
             })
         }
     }
-
-
 
     return (
         <div className='h-screen'>
@@ -49,12 +50,12 @@ const Home = () => {
                     </div>
                 </section>
 
-                {/* /popular courses */}
+                {/* popular courses */}
                 <section className='bg-gray-50 p-5 rounded-md shadow-lg'>
                     <h2 className='text-xl md:text-2xl font-medium text-gray-700 mt-5'>Popular Courses</h2>
-                    <hr className='border border-gray-100' />
+                    {/* <hr className='border border-gray-100' /> */}
                     {allCourses && allCourses.length > 0 ? (
-                        <div className='flex items-center justify-center gap-5 mt-2 relative'>
+                        <div className='flex items-center justify-center gap-5 relative'>
                             <RiArrowLeftDoubleLine
                                 onClick={scrollLeft}
                                 className='rounded-full font-light w-[30px] h-[30px] md:w-[50px] md:h-[50px]  text-black/20 hover:text-black/60  hover:shadow-md cursor-pointer absolute bottom-[50%] translate-[50%] -left-15 md:-left-28' />
@@ -70,6 +71,24 @@ const Home = () => {
                             {/* <div className="absolute top-0 right-0 h-full w-30 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" /> */}
                         </div>
                     ) : "No courses at the moment"}
+                </section>
+
+                {/* latest courses */}
+                <section className='mt-5 md:mt-10'>
+                    <h2 className='text-xl md:text-2xl font-medium text-gray-700 mt-5'>Latest Courses</h2>
+                    <hr className='border border-gray-100' />
+                    {allCourses && allCourses.length > 0 ? (
+                        <div className=''>
+                            <div className='grid grid-cols-2 md:grid-cols-4 gap-2 mt-5'>
+                                {allCourses.slice(0, 8).map(course => <CourseCard key={course._id} courseData={course} />).reverse()}
+                            </div>
+                        </div>
+                    ) : "No courses at the moment"}
+                    {/* expolre button */}
+                    <div className='mt-10 relative '>
+                        <div className='w-full h-[200px] absolute -top-50 left-0 bg-gradient-to-t from-white via-white/80 to-transparent z-10'></div>
+                        <Link to='/course-list' className='w-max mx-auto flex items-center justify-between gap-2 btn-bg py-2 px-4  md:text-lg scroll-smooth'>Explore More <RiArrowRightDoubleLine /></Link>
+                    </div>
                 </section>
             </main>
         </div>

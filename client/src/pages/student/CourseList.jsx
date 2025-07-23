@@ -10,7 +10,7 @@ const CourseList = () => {
     const { allCourses } = useContext(AppContext)
 
     return (
-        <div className='px-10 md:px-30 py-30  '>
+        <div className='px-10 md:px-30 py-30 scroll-smooth'>
             <div className='mb-5 md:mb-10 '>
                 <p className='text-lg md:text-xl text-center text-gray-700'>Search by Course Names</p>
                 <SearchBar />
