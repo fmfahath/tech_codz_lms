@@ -79,13 +79,13 @@ const Home = () => {
                     <hr className='border border-gray-100' />
                     {allCourses && allCourses.length > 0 ? (
                         <div className=''>
-                            <div className='grid grid-cols-2 md:grid-cols-4 gap-2 mt-5'>
+                            <div className='grid grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] md:grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-2 md:gap-4 mt-5'>
                                 {allCourses.slice(0, 8).map(course => <CourseCard key={course._id} courseData={course} />).reverse()}
                             </div>
                         </div>
                     ) : "No courses at the moment"}
                     {/* expolre button */}
-                    <div className='mt-10 relative '>
+                    <div className=' mt-2 md:mt-10 relative '>
                         <div className='w-full h-[200px] absolute -top-50 left-0 bg-gradient-to-t from-white via-white/80 to-transparent z-10'></div>
                         <Link to='/course-list' className='w-max mx-auto flex items-center justify-between gap-2 btn-bg py-2 px-4  md:text-lg scroll-smooth'>Explore More <RiArrowRightDoubleLine /></Link>
                     </div>
