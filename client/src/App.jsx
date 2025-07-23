@@ -12,6 +12,7 @@ import Player from "./pages/student/Player"
 import MyEnrollments from './pages/student/MyEnrollments'
 import Navbar from './components/student/Navbar'
 import { useEffect } from 'react'
+import Footer from './components/student/Footer'
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route path='student-enrolled' element={<StudentEnrolled />} />
         </Route>
       </Routes>
+      <Footer />
     </div>
   )
 }

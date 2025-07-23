@@ -7,6 +7,7 @@ import { RiArrowRightDoubleLine } from "react-icons/ri";
 import { RiArrowLeftDoubleLine } from "react-icons/ri";
 import { Link } from 'react-router-dom'
 import Testimonial from '../../components/student/Testimonial'
+import Footer from '../../components/student/Footer'
 
 const Home = () => {
 
@@ -34,7 +35,8 @@ const Home = () => {
     }
 
     return (
-        <div className='h-screen'>
+        <main className='min-h-screen'>
+            {/* hero banner */}
             <Hero />
 
             {/*find course-search bar */}
@@ -97,7 +99,9 @@ const Home = () => {
             <section>
                 <Testimonial />
             </section>
-        </div>
+
+            {/* <Footer /> */}
+        </main>
     )
 }
 
