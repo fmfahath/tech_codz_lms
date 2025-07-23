@@ -16,15 +16,15 @@ const CourseCard = ({ courseData }) => {
     const emptyStar = 5 - fullStar - halfStar;
 
     return (
-        <Link to={`/course/${courseData._id}`} className='block max-w-[300px] bg-white hover:bg-gray-50 border border-gray-200 rounded shadow hover:shadow-lg p-2'>
+        <Link to={`/course/${courseData._id}`} className='flex-shrink-0  max-w-[150px] md:max-w-[300px] bg-white hover:bg-gray-50 border border-gray-200 rounded shadow hover:shadow-lg p-2'>
             {/* course thumbnail */}
             <div className='w-full'>
                 <img src={courseData.courseThumbnail} alt="" className='rounded' />
             </div>
             {/* course details */}
             <div className='mt-2'>
-                <h1 className='text-lg font-semibold'>{courseData.courseTitle}</h1>
-                <p className='text-sm text-gray-600'>Course by: {courseData.educator?.name ? courseData.educator?.name : "Verified Instructors"} </p>
+                <h1 className='text-md md:text-lg font-semibold truncate'>{courseData.courseTitle}</h1>
+                <p className='text-[10px] md:text-sm text-gray-600'>Course by: {courseData.educator?.name ? courseData.educator?.name : "Verified Instructors"} </p>
                 <div className='flex items-center gap-1 my-1 text-yellow-500'>
                     {[...Array(fullStar)].map((_, i) => <FaStar key={i} />)}
                     {halfStar > 0 && <FaRegStarHalfStroke />}
