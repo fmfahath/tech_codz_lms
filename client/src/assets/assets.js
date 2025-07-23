@@ -247,7 +247,7 @@ export const dummyCourses = [
         "createdAt": "2024-12-17T08:16:53.622Z",
         "updatedAt": "2025-01-02T04:47:44.701Z",
         "__v": 4,
-        "courseThumbnail": "https://img.youtube.com/vi/CBWnBi-awSA/maxresdefault.jpg"
+        "courseThumbnail": "https://img.youtube.com/vi/PkZNo7MFNFg/maxresdefault.jpg"
     },
     {
         "_id": "675ac1512100b91a6d9b8b24",
@@ -319,7 +319,7 @@ export const dummyCourses = [
         "createdAt": "2024-12-17T08:16:53.622Z",
         "updatedAt": "2025-01-02T06:47:54.446Z",
         "__v": 3,
-        "courseThumbnail": "https://img.youtube.com/vi/HdLIMoQkXFA/maxresdefault.jpg"
+        "courseThumbnail": "https://img.youtube.com/vi/eWRfhZUzrAc/maxresdefault.jpg"
     },
     {
         "_id": "605c72efb3f1c2b1f8e4e1ae",
@@ -355,7 +355,7 @@ export const dummyCourses = [
             {
                 "chapterId": "chapter2",
                 "chapterOrder": 2,
-                "chapterTitle": "Basic Security Practices",
+                "chapterTitle": "Cyber Security Roadmap",
                 "chapterContent": [
                     {
                         "lectureId": "lecture3",
@@ -385,7 +385,7 @@ export const dummyCourses = [
         "createdAt": "2024-12-27T11:30:00.000Z",
         "updatedAt": "2024-12-31T04:14:49.773Z",
         "__v": 2,
-        "courseThumbnail": "https://img.youtube.com/vi/jZFaMEqEqEQ/maxresdefault.jpg"
+        "courseThumbnail": "https://img.youtube.com/vi/v7BNtpw53AA/maxresdefault.jpg"
     },
     {
         "_id": "605c72efb3f1c2b1f8e4e1a7",
@@ -451,7 +451,7 @@ export const dummyCourses = [
         "createdAt": "2024-12-17T08:16:53.622Z",
         "updatedAt": "2024-12-31T05:31:27.290Z",
         "__v": 2,
-        "courseThumbnail": "https://img.youtube.com/vi/lpx2zFkapIk/maxresdefault.jpg"
+        "courseThumbnail": "https://img.youtube.com/vi/zJSY8tbf_ys/maxresdefault.jpg"
     },
     {
         "_id": "605c72efb3f1c2b1f8e4e1ac",
@@ -516,7 +516,7 @@ export const dummyCourses = [
         "createdAt": "2024-12-17T08:16:53.622Z",
         "updatedAt": "2024-12-31T05:32:55.357Z",
         "__v": 1,
-        "courseThumbnail": "https://img.youtube.com/vi/0yboGn8errU/maxresdefault.jpg"
+        "courseThumbnail": "https://img.youtube.com/vi/RWgW-CgdIk0/maxresdefault.jpg"
     },
     {
         "_id": "605c72efb3f1c2b1f8e4e1ad",
@@ -589,7 +589,7 @@ export const dummyCourses = [
         "createdAt": "2024-12-27T10:00:00.000Z",
         "updatedAt": "2024-12-31T09:57:48.992Z",
         "__v": 3,
-        "courseThumbnail": "https://img.youtube.com/vi/E4znbZgUWzA/maxresdefault.jpg"
+        "courseThumbnail": "https://img.youtube.com/vi/Q4ap8MXd4T4/maxresdefault.jpg"
     },
     {
         "_id": "605c72efb3f1c2b1f8e4e1aa",
@@ -654,11 +654,11 @@ export const dummyCourses = [
         "createdAt": "2024-12-17T08:16:53.622Z",
         "updatedAt": "2025-01-02T06:53:59.753Z",
         "__v": 1,
-        "courseThumbnail": "https://img.youtube.com/vi/631lFJdQvoo/maxresdefault.jpg"
+        "courseThumbnail": "https://img.youtube.com/vi/FeQz8tQFsuw/maxresdefault.jpg"
     },
     {
         "_id": "605c72efb3f1c2b1f8e4e1ab",
-        "courseTitle": "Introduction to Cybersecurity",
+        "courseTitle": "Google Cloud Computing",
         "courseDescription": "<h2>Protect the Digital World</h2><p>This course covers the essentials of cybersecurity, including understanding threats, vulnerabilities, and how to secure systems against cyber-attacks. Ideal for beginners, this course will prepare you for a career in cybersecurity.</p><p>By the end of this course, you will be able to identify and mitigate risks, implement security best practices, and understand the fundamentals of encryption and network security.</p><ul><li>Understand common cybersecurity threats</li><li>Learn about encryption and secure communication</li><li>Explore tools for penetration testing</li></ul>",
         "coursePrice": 59.99,
         "isPublished": true,
@@ -719,7 +719,7 @@ export const dummyCourses = [
         "createdAt": "2024-12-17T08:16:53.622Z",
         "updatedAt": "2025-01-02T06:56:13.208Z",
         "__v": 1,
-        "courseThumbnail": "https://img.youtube.com/vi/WbV3zRgpw_E/maxresdefault.jpg"
+        "courseThumbnail": "https://img.youtube.com/vi/jVE7qKWg8mc/maxresdefault.jpg"
     }
 ]
 

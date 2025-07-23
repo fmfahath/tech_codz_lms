@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Navbar from '../../components/student/Navbar'
 import Hero from '../../components/student/Hero'
 import SearchBar from '../../components/student/SearchBar'
+import { AppContext } from '../../context/AppContext'
+import CourseCard from '../../components/student/CourseCard'
 
 const Home = () => {
+
+    const { allCourses } = useContext(AppContext)
     return (
         <div className='h-screen'>
             {/* <Navbar /> */}
@@ -24,9 +28,11 @@ const Home = () => {
                 <section>
                     <h2 className='text-xl md:text-2xl font-medium text-gray-700 mt-10'>Popular Courses</h2>
                     <hr className='border border-gray-100' />
-                    <div>
-
-                    </div>
+                    {allCourses && allCourses.length > 0 ? (
+                        <div>
+                            {allCourses.map(course => <CourseCard key={course._id} courseData={course} />)}
+                        </div>
+                    ) : "No courses at the moment"}
                 </section>
             </main>
         </div>
