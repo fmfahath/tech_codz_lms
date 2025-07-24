@@ -83,7 +83,7 @@ const Home = () => {
                 <hr className='border border-gray-100' />
                 {allCourses && allCourses.length > 0 ? (
                     <div className=''>
-                        <div className='grid grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] md:grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-2 md:gap-4 mt-5'>
+                        <div className='grid grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] md:grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-2 md:gap-2 mt-5'>
                             {allCourses.slice(0, 8).map(course => <CourseCard key={course._id} courseData={course} />).reverse()}
                         </div>
                     </div>

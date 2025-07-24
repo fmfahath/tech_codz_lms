@@ -40,7 +40,7 @@ const CourseList = () => {
             {input && <div className='my-2'>
                 <p className='text-gray-700'>Search word: <span className='inline-flex items-center gap-1 py-1 px-2 bg-gray-300/70 hover:bg-red-200 rounded-md shadow-md cursor-pointer'>{input}<IoMdCloseCircle className='text-red-500 cursor-pointer' onClick={() => navigate('/course-list')} /></span></p>
             </div>}
-            <div className='grid grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] md:grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-2 md:gap-4  mt-5'>
+            <div className='grid grid-cols-[repeat(auto-fill,_minmax(100px,1fr))] md:grid-cols-[repeat(auto-fill,_minmax(250px,1fr))] gap-2 md:gap-4  mt-5'>
                 {
                     filteredCourses ? filteredCourses.map((course, i) => <CourseCard key={i} courseData={course} />) : <Loading />
                 }
