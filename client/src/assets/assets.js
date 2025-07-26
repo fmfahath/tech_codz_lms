@@ -196,7 +196,7 @@ export const dummyCourses = [
                         "lectureId": "lecture1",
                         "lectureTitle": "What is JavaScript?",
                         "lectureDuration": 16,
-                        "lectureUrl": "https://youtu.be/CBWnBi-awSA",
+                        "lectureUrl": "https://youtu.be/PkZNo7MFNFg",
                         "isPreviewFree": true,
                         "lectureOrder": 1
                     },
@@ -204,7 +204,7 @@ export const dummyCourses = [
                         "lectureId": "lecture2",
                         "lectureTitle": "Setting Up Your Environment",
                         "lectureDuration": 19,
-                        "lectureUrl": "https://youtu.be/4l87c2aeB4I",
+                        "lectureUrl": "https://youtu.be/PkZNo7MFNFg",
                         "isPreviewFree": true,
                         "lectureOrder": 2
                     },
@@ -212,7 +212,7 @@ export const dummyCourses = [
                         "lectureId": "lecture3",
                         "lectureTitle": "Basics of JavScript",
                         "lectureDuration": 30,
-                        "lectureUrl": "https://youtu.be/4l87c2aeB4I",
+                        "lectureUrl": "https://youtu.be/PkZNo7MFNFg",
                         "isPreviewFree": false,
                         "lectureOrder": 3
                     }

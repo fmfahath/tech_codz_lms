@@ -9,6 +9,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { MdOutlineSlowMotionVideo } from "react-icons/md";
 import YouTube from 'react-youtube'
 import humanizeDuration from 'humanize-duration'
+import { TbPlayerPlayFilled } from "react-icons/tb";
 
 const CourseDetails = () => {
 
@@ -18,8 +19,7 @@ const CourseDetails = () => {
     const [stars, setStars] = useState({ full: 0, half: 0, empty: 0 })
     const [rating, setRating] = useState(0)
     const [toggle, setToggle] = useState({})
-
-    console.log("toggle: ", toggle);
+    const [playerData, setPlayerData] = useState(null)
 
 
     //rating stars------------------------
@@ -117,8 +117,8 @@ const CourseDetails = () => {
                     {/* chapter */}
                     <div className='flex-1'>
                         {courseData?.courseContent?.map((chapter, index) => (
-                            <div key={index} className=' bg-white border border-gray-200 rounded shadow-md' onClick={(prev) => toggleSection(index)}>
-                                <div className='flex items-center justify-between gap-2 p-2 border-b border-gray-200 cursor-pointer '>
+                            <div key={index} className=' bg-white border border-gray-200 rounded shadow-md'>
+                                <div className='flex items-center justify-between gap-2 p-2 border-b border-gray-200 cursor-pointer' onClick={(prev) => toggleSection(index)}>
                                     <div className='flex items-center gap-2'>
                                         <IoIosArrowDown className={`self-center transform transition-transform ${toggle[index] ? "rotate-180" : ""}`} />
                                         <p className=''>{chapter.chapterTitle}</p>
@@ -136,7 +136,7 @@ const CourseDetails = () => {
                                                     <p>{chapterContent.lectureTitle}</p>
                                                 </div>
                                                 <div className='flex gap-4 items-center justify-between'>
-                                                    <Link className='text-blue-500 cursor-pointer italic'>{chapterContent.isPreviewFree && "Preview"}</Link>
+                                                    <Link onClick={() => setPlayerData(chapterContent.lectureUrl.split('/').pop())} className='text-blue-500 cursor-pointer italic'>{chapterContent.isPreviewFree && "Preview"}</Link>
                                                     <p className='text-gray-700 text-[13px] italic'>{humanizeDuration(chapterContent.lectureDuration * 60 * 1000, { units: ["h", "m"] })}</p>
                                                 </div>
                                             </div>
@@ -149,7 +149,12 @@ const CourseDetails = () => {
                     </div>
                     {/* video player */}
                     <div className=''>
-                        <YouTube videoId="" opts={{ playerVars: { autoplay: 1 } }} iframeClassName='w-full aspect-video' />
+                        {playerData ? <YouTube videoId={playerData} opts={{ playerVars: { autoplay: 1 } }} iframeClassName='w-full aspect-video' /> :
+                            <div className='flex flex-col items-center justify-center gap-5 bg-black min-w-[550px]  min-h-[250px] text-white'>
+                                <p className='text-center'>CLick the <span className='text-blue-500 italic'>Preview</span> Link to View the Free Lecture Videos</p>
+                                <TbPlayerPlayFilled className='w-15 h-15 bg-blue-500 hover:bg-blue-400 rounded-full p-2 cursor-pointer ' onClick={() => setPlayerData(courseData?.courseContent[0]?.chapterContent[0]?.lectureUrl.split('/').pop())} />
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
