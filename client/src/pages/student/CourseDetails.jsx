@@ -68,7 +68,7 @@ const CourseDetails = () => {
     return (
         <div className='w-full min-h-screen px-5 md:px-30 pt-[20%] md:pt-[10%] mb-10 bg-gray-50'>
             {/* course heading card */}
-            <div className='w-full flex flex-col md:flex-row justify-start gap-5 py-4 px-6 bg-white rounded-md shadow-lg'>
+            <div className='w-full flex flex-col md:flex-row justify-start gap-5 py-4 px-6 bg-lue rounded-md shadow-lg'>
                 <div className=''>
                     <img className=' md:max-w-[350px] rounded-md' src={courseData?.courseThumbnail} alt="course-thubmnail" />
                 </div>
@@ -112,30 +112,30 @@ const CourseDetails = () => {
 
             {/* course structure */}
             <div className=''>
-                <p className='text-xl font-semibold text-gray-800 mb-10'>Course Structure</p>
-                <div className='flex justify-between gap-5'>
+                <p className='text-xl font-semibold text-gray-800 mb-5 md:mb-10'>Course Structure</p>
+                <div className='flex flex-col md:flex-row justify-between gap-5'>
                     {/* chapter */}
                     <div className='flex-1'>
                         {courseData?.courseContent?.map((chapter, index) => (
                             <div key={index} className=' bg-white border border-gray-200 rounded shadow-md'>
-                                <div className='flex items-center justify-between gap-2 p-2 border-b border-gray-200 cursor-pointer' onClick={(prev) => toggleSection(index)}>
+                                <div className='flex flex-col md:flex-row items-start md:items-center justify-between gap-2 p-2 border-b border-gray-200 cursor-pointer' onClick={(prev) => toggleSection(index)}>
                                     <div className='flex items-center gap-2'>
                                         <IoIosArrowDown className={`self-center transform transition-transform ${toggle[index] ? "rotate-180" : ""}`} />
                                         <p className=''>{chapter.chapterTitle}</p>
                                     </div>
                                     <div className='text-sm md:text-[14px] italic'>
-                                        <p>{`${chapter.chapterContent.length} Lectures -  ${calculateChapterDuration(chapter)}`}</p>
+                                        <p className='ml-6 md:ml-0'>{`${chapter.chapterContent.length} Lectures -  ${calculateChapterDuration(chapter)}`}</p>
                                     </div>
                                 </div>
                                 <div className={`px-2 ${toggle[index] ? "max-h-96" : "max-h-0"} overflow-hidden transition-all duration-300 ease-in-out`}>
                                     {
                                         chapter.chapterContent.map((chapterContent, i) => (
-                                            <div key={i} className={`flex gap-4 items-center justify-between text-sm md:text-[15px] font-light my-2 md:my-4`}>
+                                            <div key={i} className={`flex flex-col md:flex-row gap-4 items-start md:items-center justify-between text-sm md:text-[15px] font-light my-2 md:my-4`}>
                                                 <div className='flex gap-4 items-center justify-start ml-5'>
                                                     <MdOutlineSlowMotionVideo />
                                                     <p>{chapterContent.lectureTitle}</p>
                                                 </div>
-                                                <div className='flex gap-4 items-center justify-between'>
+                                                <div className='flex gap-4 items-center ml-auto justify-between'>
                                                     <Link onClick={() => setPlayerData(chapterContent.lectureUrl.split('/').pop())} className='text-blue-500 cursor-pointer italic'>{chapterContent.isPreviewFree && "Preview"}</Link>
                                                     <p className='text-gray-700 text-[13px] italic'>{humanizeDuration(chapterContent.lectureDuration * 60 * 1000, { units: ["h", "m"] })}</p>
                                                 </div>
@@ -150,9 +150,9 @@ const CourseDetails = () => {
                     {/* video player */}
                     <div className=''>
                         {playerData ? <YouTube videoId={playerData} opts={{ playerVars: { autoplay: 1 } }} iframeClassName='w-full aspect-video' /> :
-                            <div className='flex flex-col items-center justify-center gap-5 bg-black min-w-[550px]  min-h-[250px] text-white'>
+                            <div className='flex flex-col items-center justify-center gap-5 bg-black w-full md:min-w-[550px] h-[180px] md:min-h-[250px] text-white'>
                                 <p className='text-center'>CLick the <span className='text-blue-500 italic'>Preview</span> Link to View the Free Lecture Videos</p>
-                                <TbPlayerPlayFilled className='w-15 h-15 bg-blue-500 hover:bg-blue-400 rounded-full p-2 cursor-pointer ' onClick={() => setPlayerData(courseData?.courseContent[0]?.chapterContent[0]?.lectureUrl.split('/').pop())} />
+                                <TbPlayerPlayFilled className='w-10 h-10 md:w-15 md:h-15 bg-blue-500 hover:bg-blue-400 rounded-full p-2 cursor-pointer ' onClick={() => setPlayerData(courseData?.courseContent[0]?.chapterContent[0]?.lectureUrl.split('/').pop())} />
                             </div>
                         }
                     </div>
