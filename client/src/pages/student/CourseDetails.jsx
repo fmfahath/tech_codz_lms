@@ -8,7 +8,7 @@ import { FaRegStarHalfStroke } from "react-icons/fa6";
 import { IoIosArrowDown } from "react-icons/io";
 import { MdOutlineSlowMotionVideo } from "react-icons/md";
 import YouTube from 'react-youtube'
-
+import humanizeDuration from 'humanize-duration'
 
 const CourseDetails = () => {
 
@@ -17,8 +17,12 @@ const CourseDetails = () => {
     const [courseData, setCourseData] = useState(null)
     const [stars, setStars] = useState({ full: 0, half: 0, empty: 0 })
     const [rating, setRating] = useState(0)
+    const [toggle, setToggle] = useState({})
 
-    //rating stars
+    console.log("toggle: ", toggle);
+
+
+    //rating stars------------------------
     const ratingStar = () => {
         const rating = calculateRating(courseData);
         const full = Math.floor(rating);
@@ -29,9 +33,22 @@ const CourseDetails = () => {
         setRating(rating)
     }
 
-    //fetching course's data
+    //fetching course's data------------------
     const fetchCourseData = async () => {
         setCourseData(await allCourses.find(course => (course._id === id)))
+    }
+
+    // calculate chapter-------------------
+    const calculateChapterDuration = (chapter) => {
+        let chapterDuration = 0;
+
+        chapterDuration = chapter.chapterContent.reduce((acc, lecture) => (acc + lecture.lectureDuration), 0)
+        return humanizeDuration(chapterDuration * 60 * 1000, { units: ["h", "m"] })
+    }
+
+    //toggle div show/hide-------------------
+    const toggleSection = (index) => {
+        setToggle((prev) => ({ ...prev, [index]: !prev[index] }))
     }
 
     useEffect(() => {
@@ -100,27 +117,27 @@ const CourseDetails = () => {
                     {/* chapter */}
                     <div className='flex-1'>
                         {courseData?.courseContent?.map((chapter, index) => (
-                            <div key={index} className=' bg-white border border-gray-200 rounded shadow-md'>
+                            <div key={index} className=' bg-white border border-gray-200 rounded shadow-md' onClick={(prev) => toggleSection(index)}>
                                 <div className='flex items-center justify-between gap-2 p-2 border-b border-gray-200 cursor-pointer '>
                                     <div className='flex items-center gap-2'>
-                                        <IoIosArrowDown className='self-center' />
+                                        <IoIosArrowDown className={`self-center transform transition-transform ${toggle[index] ? "rotate-180" : ""}`} />
                                         <p className=''>{chapter.chapterTitle}</p>
                                     </div>
-                                    <div className='text-sm md:text-[15px]'>
-                                        <p>2 Lectures - 23 Minutes </p>
+                                    <div className='text-sm md:text-[14px] italic'>
+                                        <p>{`${chapter.chapterContent.length} Lectures -  ${calculateChapterDuration(chapter)}`}</p>
                                     </div>
                                 </div>
-                                <div className='p-2'>
+                                <div className={`px-2 ${toggle[index] ? "max-h-96" : "max-h-0"} overflow-hidden transition-all duration-300 ease-in-out`}>
                                     {
                                         chapter.chapterContent.map((chapterContent, i) => (
-                                            <div key={i} className='flex gap-4 items-center justify-between text-sm md:text-[15px] font-light my-2 md:my-4'>
+                                            <div key={i} className={`flex gap-4 items-center justify-between text-sm md:text-[15px] font-light my-2 md:my-4`}>
                                                 <div className='flex gap-4 items-center justify-start ml-5'>
                                                     <MdOutlineSlowMotionVideo />
                                                     <p>{chapterContent.lectureTitle}</p>
                                                 </div>
                                                 <div className='flex gap-4 items-center justify-between'>
-                                                    <Link className='text-blue-500 cursor-pointer'>{chapterContent.isPreviewFree && "Preview"}</Link>
-                                                    <p>{chapterContent.lectureDuration} Minutes</p>
+                                                    <Link className='text-blue-500 cursor-pointer italic'>{chapterContent.isPreviewFree && "Preview"}</Link>
+                                                    <p className='text-gray-700 text-[13px] italic'>{humanizeDuration(chapterContent.lectureDuration * 60 * 1000, { units: ["h", "m"] })}</p>
                                                 </div>
                                             </div>
                                         ))
@@ -136,7 +153,7 @@ const CourseDetails = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

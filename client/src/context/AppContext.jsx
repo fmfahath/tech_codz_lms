@@ -23,6 +23,7 @@ export const AppCondextProvider = (props) => {
         return averageRating;
     }
 
+
     const value = {
         allCourses, setAllCourses,
         calculateRating,

@@ -205,8 +205,16 @@ export const dummyCourses = [
                         "lectureTitle": "Setting Up Your Environment",
                         "lectureDuration": 19,
                         "lectureUrl": "https://youtu.be/4l87c2aeB4I",
-                        "isPreviewFree": false,
+                        "isPreviewFree": true,
                         "lectureOrder": 2
+                    },
+                    {
+                        "lectureId": "lecture3",
+                        "lectureTitle": "Basics of JavScript",
+                        "lectureDuration": 30,
+                        "lectureUrl": "https://youtu.be/4l87c2aeB4I",
+                        "isPreviewFree": false,
+                        "lectureOrder": 3
                     }
                 ]
             },
