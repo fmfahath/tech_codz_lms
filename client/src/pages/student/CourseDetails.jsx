@@ -5,6 +5,9 @@ import { RiArrowRightDoubleLine } from "react-icons/ri";
 import { FaStar } from "react-icons/fa6";
 import { FaRegStar } from "react-icons/fa6";
 import { FaRegStarHalfStroke } from "react-icons/fa6";
+import { IoIosArrowDown } from "react-icons/io";
+import { MdOutlineSlowMotionVideo } from "react-icons/md";
+import YouTube from 'react-youtube'
 
 
 const CourseDetails = () => {
@@ -54,7 +57,7 @@ const CourseDetails = () => {
                 </div>
                 <div className='md:max-w-[600px] '>
                     <div className=''>
-                        <h1 className='font-roboto text-[23px] md:text-3xl font-medium md:font-semibold '>{courseData?.courseTitle}</h1>
+                        <h1 className='font-roboto text-gray-800 text-[23px] md:text-3xl font-medium md:font-semibold '>{courseData?.courseTitle}</h1>
                         <p className='text-gray-800 mt-2' dangerouslySetInnerHTML={{ __html: courseData?.courseDescription?.slice(0, 150) }}></p>
                     </div>
                     <div className=''>
@@ -82,9 +85,56 @@ const CourseDetails = () => {
                 </div>
             </div>
 
-            {/* course structure / details */}
-            <div>
+            {/* course description */}
+            <div className='flex md:gap-x-10 gap-y-5'>
+                <div className='py-20 text-sm md:text-default'>
+                    <p className='text-xl font-semibold text-gray-800'>Course Description</p>
+                    <p className='rich-text max-w-[900px]' dangerouslySetInnerHTML={{ __html: courseData?.courseDescription }}></p>
+                </div>
+            </div>
 
+            {/* course structure */}
+            <div className=''>
+                <p className='text-xl font-semibold text-gray-800 mb-10'>Course Structure</p>
+                <div className='flex justify-between gap-5'>
+                    {/* chapter */}
+                    <div className='flex-1'>
+                        {courseData?.courseContent?.map((chapter, index) => (
+                            <div key={index} className=' bg-white border border-gray-200 rounded shadow-md'>
+                                <div className='flex items-center justify-between gap-2 p-2 border-b border-gray-200 cursor-pointer '>
+                                    <div className='flex items-center gap-2'>
+                                        <IoIosArrowDown className='self-center' />
+                                        <p className=''>{chapter.chapterTitle}</p>
+                                    </div>
+                                    <div className='text-sm md:text-[15px]'>
+                                        <p>2 Lectures - 23 Minutes </p>
+                                    </div>
+                                </div>
+                                <div className='p-2'>
+                                    {
+                                        chapter.chapterContent.map((chapterContent, i) => (
+                                            <div key={i} className='flex gap-4 items-center justify-between text-sm md:text-[15px] font-light my-2 md:my-4'>
+                                                <div className='flex gap-4 items-center justify-start ml-5'>
+                                                    <MdOutlineSlowMotionVideo />
+                                                    <p>{chapterContent.lectureTitle}</p>
+                                                </div>
+                                                <div className='flex gap-4 items-center justify-between'>
+                                                    <Link className='text-blue-500 cursor-pointer'>{chapterContent.isPreviewFree && "Preview"}</Link>
+                                                    <p>{chapterContent.lectureDuration} Minutes</p>
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                        ))}
+
+                    </div>
+                    {/* video player */}
+                    <div className=''>
+                        <YouTube videoId="" opts={{ playerVars: { autoplay: 1 } }} iframeClassName='w-full aspect-video' />
+                    </div>
+                </div>
             </div>
         </div>
     )
