@@ -10,17 +10,19 @@ export const AppCondextProvider = (props) => {
 
     //calculate course ratings----------------------------------------
     const calculateRating = (courseData) => {
+
         if (courseData?.courseRatings && courseData?.courseRatings.length == 0) return 0;
 
         // let totalRating = 0;
-        // course.courseRatings.forEach(rating => {
+        // courseData.courseRatings.forEach(rating => {
         //     totalRating += rating.rating;
         // })
-        // averageRating = totalRating / course.courseRatings.length
+        // averageRating = totalRating / courseData.courseRatings.length
 
         const averageRating = courseData.courseRatings.reduce((acc, rating) => (acc + rating.rating), 0) / courseData.courseRatings.length;
         return averageRating;
     }
+
 
     const value = {
         allCourses, setAllCourses,

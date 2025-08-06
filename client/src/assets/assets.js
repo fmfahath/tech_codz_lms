@@ -196,7 +196,7 @@ export const dummyCourses = [
                         "lectureId": "lecture1",
                         "lectureTitle": "What is JavaScript?",
                         "lectureDuration": 16,
-                        "lectureUrl": "https://youtu.be/CBWnBi-awSA",
+                        "lectureUrl": "https://youtu.be/PkZNo7MFNFg",
                         "isPreviewFree": true,
                         "lectureOrder": 1
                     },
@@ -204,9 +204,17 @@ export const dummyCourses = [
                         "lectureId": "lecture2",
                         "lectureTitle": "Setting Up Your Environment",
                         "lectureDuration": 19,
-                        "lectureUrl": "https://youtu.be/4l87c2aeB4I",
-                        "isPreviewFree": false,
+                        "lectureUrl": "https://youtu.be/PkZNo7MFNFg",
+                        "isPreviewFree": true,
                         "lectureOrder": 2
+                    },
+                    {
+                        "lectureId": "lecture3",
+                        "lectureTitle": "Basics of JavScript",
+                        "lectureDuration": 30,
+                        "lectureUrl": "https://youtu.be/PkZNo7MFNFg",
+                        "isPreviewFree": false,
+                        "lectureOrder": 3
                     }
                 ]
             },
@@ -245,7 +253,17 @@ export const dummyCourses = [
                 "userId": "user_2qjlgkAqIMpiR2flWIRzvWKtE0w",
                 "rating": 5,
                 "_id": "6773e37360cb0ab974342314"
-            }
+            },
+            {
+                "userId": "user_2qjlgkAqIMpwrwrrlWIRzvWKtewf",
+                "rating": 3,
+                "_id": "6773e37360cb0ab974342314"
+            },
+            {
+                "userId": "user_2qjlgkewrwerAqIMpwrwvWKtewf",
+                "rating": 2.5,
+                "_id": "6773e37360cb0ab974342314"
+            },
         ],
         "createdAt": "2024-12-17T08:16:53.622Z",
         "updatedAt": "2025-01-02T04:47:44.701Z",
