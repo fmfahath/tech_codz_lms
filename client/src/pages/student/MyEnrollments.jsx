@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { dummyStudentEnrolled } from '../../assets/assets'
 import { AppContext } from '../../context/AppContext'
 import humanizeDuration from 'humanize-duration'
+import { Line } from 'rc-progress'
 
 const MyEnrollments = () => {
 
@@ -67,7 +68,7 @@ const MyEnrollments = () => {
             <div>
                 <h2 className='text-xl md:text-2xl font-medium'>My Enrollments</h2>
                 <div>
-                    <table className='w-full md:table-auto table-fixed overflow-hidden bg-gray-500/10 mt-10 px-4 py-2 shadow border border-gray-50'>
+                    <table className='w-full md:table-auto table-fixed overflow-hidden bg-gray-500/5 mt-10 px-4 py-2 shadow border border-gray-50'>
                         <thead className='max-sm:hidden text-left'>
                             <tr className=''>
                                 <th className='px-4 py-2 font-medium'>Duration</th>
@@ -83,11 +84,15 @@ const MyEnrollments = () => {
                                         <img className='md:w-30' src={enrolledCourse.courseThubmnail} alt="course-thumbnail" />
                                         <div>
                                             <p>{enrolledCourse.courseTitle}</p>
-                                            <p>progress bar...</p>
+                                            <Line
+                                                strokeWidth={3}
+                                                percent={enrolledCourse ? (enrolledCourse.completedLectures * 100) / enrolledCourse.totalLectures : 0}
+                                                className='bg-gray-300 rounded-full mt-1'
+                                            />
                                         </div>
                                     </td>
                                     <td className='max-sm:hidden px-4 md:py-2'>{enrolledCourse.courseDuration}</td>
-                                    <td className='max-sm:hidden px-4 md:py-2'>{enrolledCourse.completedLectures}/{enrolledCourse.totalLectures}</td>
+                                    <td className='max-sm:hidden px-4 md:py-2'>{enrolledCourse.completedLectures}/{enrolledCourse.totalLectures} Lectures</td>
                                     <td className='px-4 py-2'><button className='max-w-full min-w-[110px] mx-auto text-sm md:text-default text-white px-2 py-1.5 bg-blue-500 rounded shadow cursor-pointer'>{enrolledCourse.courseStatus}</button></td>
                                 </tr>
                             ))
