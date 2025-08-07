@@ -245,7 +245,6 @@ export const dummyCourses = [
         "educator": "675ac1512100b91a6d9b8b24",
         "enrolledStudents": [
             "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-            "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
             "user_2qjlgkAqIMpiR2flWIRzvWKtE0w"
         ],
         "courseRatings": [
@@ -767,5 +766,47 @@ export const dummyTestimonial = [
         feedback: 'Amazing support and engaging lessons. I finally understand how coding works!'
     },
 ];
+
+export const dummyStudentEnrolled = [
+    {
+        "studentDetails": {
+            "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+            "name": "Fahath",
+            "imageUrl": profile_img_1
+        },
+        "courseDetails": {
+            "_id": "605c72efb3f1c2b1f8e4e1a1",
+            "lectureCompleted": 2,
+            "courseStatus": "On Going"
+        },
+        "purchaseDate": "2025-08-06T08:39:55.509Z"
+    },
+    {
+        "studentDetails": {
+            "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+            "name": "Fahath",
+            "imageUrl": profile_img_1
+        },
+        "courseDetails": {
+            "_id": "675ac1512100b91a6d9b8b24",
+            "lectureCompleted": 3,
+            "courseStatus": "Completed"
+        },
+        "purchaseDate": "2025-08-06T08:39:55.509Z"
+    },
+    {
+        "studentDetails": {
+            "_id": "user_2qjlgkAqIMpiR2flWIRzvWKtE0w",
+            "name": "David",
+            "imageUrl": profile_img_2
+        },
+        "courseDetails": {
+            "_id": "675ac1512100b91a6d9b8b24",
+            "lectureCompleted": 3,
+            "courseStatus": "Completed"
+        },
+        "purchaseDate": "2025-08-06T08:39:55.509Z"
+    },
+]
 
 export const logo = { white_logo, black_logo }
