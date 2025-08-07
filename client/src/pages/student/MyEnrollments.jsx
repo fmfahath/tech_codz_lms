@@ -3,12 +3,14 @@ import { dummyStudentEnrolled } from '../../assets/assets'
 import { AppContext } from '../../context/AppContext'
 import humanizeDuration from 'humanize-duration'
 import { Line } from 'rc-progress'
+import { useNavigate } from 'react-router-dom'
 
 const MyEnrollments = () => {
 
     const { allCourses } = useContext(AppContext)
     const [userId, setUserId] = useState("user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V")
     const [enrolledCourseDetails, setEnrolledCourseDetails] = useState(null)
+    const navigate = useNavigate()
 
     // calculate chapter duration-------------------
     const calculateChapterDuration = (chapter) => {
@@ -37,11 +39,13 @@ const MyEnrollments = () => {
             const courseDuration = humanizeDuration(tempCourseDuration * 60 * 1000, { units: ["h", "m"] })
 
             //get course thumbnail & completed lectures & course status
+            const courseId = tempCourseData._id;
             const tempCourseThumbnail = tempCourseData.courseThumbnail;
             const tempCompletedLectures = tempArrData.courseDetails.lectureCompleted;
             const tempCourseStatus = tempArrData.courseDetails.courseStatus;
 
             const tempCourseDetails = {
+                courseId,
                 courseThubmnail: tempCourseThumbnail,
                 courseTitle: tempCourseData.courseTitle,
                 totalLectures: tempTotalLectures,
@@ -93,7 +97,7 @@ const MyEnrollments = () => {
                                     </td>
                                     <td className='max-sm:hidden px-4 md:py-2'>{enrolledCourse.courseDuration}</td>
                                     <td className='max-sm:hidden px-4 md:py-2'>{enrolledCourse.completedLectures}/{enrolledCourse.totalLectures} Lectures</td>
-                                    <td className='px-4 py-2'><button className='max-w-full min-w-[110px] mx-auto text-sm md:text-default text-white px-2 py-1.5 bg-blue-500 rounded shadow cursor-pointer'>{enrolledCourse.courseStatus}</button></td>
+                                    <td className='px-4 py-2'><button onClick={() => navigate(`player/${enrolledCourse.courseId}`)} className='max-w-full min-w-[110px] mx-auto text-sm md:text-default text-white px-2 py-1.5 bg-blue-500 rounded shadow cursor-pointer'>{enrolledCourse.courseStatus}</button></td>
                                 </tr>
                             ))
                             }
