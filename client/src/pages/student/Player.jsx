@@ -7,6 +7,9 @@ import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import YouTube from 'react-youtube'
 import { TbPlayerPlayFilled } from "react-icons/tb";
+import { FaStar } from "react-icons/fa6";
+import { FaRegStar } from "react-icons/fa6";
+import { FaRegStarHalfStroke } from "react-icons/fa6";
 
 
 const Player = () => {
@@ -51,13 +54,13 @@ const Player = () => {
                                 </div>
                                 <div className={`${toggle[index] ? "max-h-96" : "max-h-0"} overflow-hidden transition-all duration-300 ease-in-out`}>
                                     {chapter.chapterContent.map((lecture, i) => (
-                                        <div key={i} className=' flex items-center justify-between gap-5 pl-2 md:pl-5 text-gray-700 mt-2 '>
-                                            <div className='flex items-center gap-2 '>
+                                        <div key={i} className='flex items-center justify-between gap-5 pl-2 md:pl-5 text-gray-700 mt-2 '>
+                                            <div className='w-auto flex items-start gap-2 '>
                                                 {/* <IoCheckmarkDoneCircleOutline /> */}
                                                 <IoCheckmarkDoneCircleSharp className='text-blue-500' />
-                                                <p className='w-48 md:w-auto truncate'>{lecture.lectureTitle}</p>
+                                                <p className='w-70 md:w-auto truncate'>{lecture.lectureTitle}</p>
                                             </div>
-                                            <div className='md:w-40 flex items-center gap-5 '>
+                                            <div className='md:w-[35%] flex items-start justify-end md:justify-start gap-5 '>
                                                 <Link className='text-blue-500' onClick={() => setPlayerData({ ...lecture, chapterId: index + 1, lectudeId: i + 1 })}>Play</Link>
                                                 <p className='hidden md:block'>{humanizeDuration(lecture.lectureDuration * 60 * 1000, { units: ["h", "m"] })}</p>
                                             </div>
@@ -85,6 +88,18 @@ const Player = () => {
                     </div>
                 </div>
             )}
+
+            {/* course rating */}
+            <div className='flex items-center gap-5 text-lg md:text-xl font-medium mt-5'>
+                <h2>Rate this course</h2>
+                <div className='flex gap-1 text-[25px] text-yellow-400 cursor-pointer'>
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                    <FaRegStarHalfStroke />
+                    <FaRegStar />
+                </div>
+            </div>
         </div >
     )
 }
