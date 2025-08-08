@@ -1,8 +1,106 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { AppContext } from '../../context/AppContext'
+import humanizeDuration from 'humanize-duration'
+import { IoIosArrowDown } from "react-icons/io";
+import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
+import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
+import YouTube from 'react-youtube'
+import { TbPlayerPlayFilled } from "react-icons/tb";
+import { FaStar } from "react-icons/fa6";
+import { FaRegStar } from "react-icons/fa6";
+import { FaRegStarHalfStroke } from "react-icons/fa6";
+
 
 const Player = () => {
+
+    const { courseId } = useParams()
+    const { allCourses } = useContext(AppContext)
+    const [courseDetails, setCourseDetails] = useState(null)
+    const [toggle, setToggle] = useState({})
+    const [playerData, setPlayerData] = useState(null)
+
+    //getCourseDetails
+    const getCourseDetails = () => {
+        const courseData = allCourses.find(course => course._id === courseId)
+        setCourseDetails(courseData)
+    }
+
+    //toggle menu content - show/hide
+    const toggleSection = (index) => {
+        setToggle(prev => ({ ...prev, [index]: !prev[index] }))
+    }
+
+    useEffect(() => {
+        if (courseId) {
+            getCourseDetails()
+        }
+    }, [courseId, allCourses])
+
+
+
     return (
-        <div>Player</div>
+        <div className='w-full min-h-screen px-4 md:px-30 pt-[30%] md:pt-[10%] mb-10'>
+            <h1 className='text-xl md:text-2xl font-medium'>Course Structure</h1>
+            {courseDetails && (
+                <div className='flex flex-col md:flex-row items-center md:items-start justify-center md:justify-between gap-5 mt-10'>
+                    {/* course structure */}
+                    <div className='w-full md:flex-1'>
+                        {courseDetails?.courseContent.map((chapter, index) => (
+                            <div key={index} className='bg-gray-500/5 mb-2 shadow rounded px-2 py-4 '>
+                                <div className='flex   items-center justify-start gap-2 cursor-pointer' onClick={() => toggleSection(index)}>
+                                    <IoIosArrowDown className={`transform transition-transform  ${toggle[index] ? "rotate-180" : ""}`} />
+                                    <p className='font-medium'>{chapter.chapterTitle}</p>
+                                </div>
+                                <div className={`${toggle[index] ? "max-h-96" : "max-h-0"} overflow-hidden transition-all duration-300 ease-in-out`}>
+                                    {chapter.chapterContent.map((lecture, i) => (
+                                        <div key={i} className='flex items-center justify-between gap-5 pl-2 md:pl-5 text-gray-700 mt-2 '>
+                                            <div className='w-auto flex items-start gap-2 '>
+                                                {/* <IoCheckmarkDoneCircleOutline /> */}
+                                                <IoCheckmarkDoneCircleSharp className='text-blue-500' />
+                                                <p className='w-70 md:w-auto truncate'>{lecture.lectureTitle}</p>
+                                            </div>
+                                            <div className='md:w-[35%] flex items-start justify-end md:justify-start gap-5 '>
+                                                <Link className='text-blue-500' onClick={() => setPlayerData({ ...lecture, chapterId: index + 1, lectudeId: i + 1 })}>Play</Link>
+                                                <p className='hidden md:block'>{humanizeDuration(lecture.lectureDuration * 60 * 1000, { units: ["h", "m"] })}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                        ))}
+                    </div>
+
+                    {/* player */}
+                    <div className='mt-5 md:mt-0'>
+                        {playerData ?
+                            <YouTube
+                                videoId={playerData.lectureUrl.split('/').pop()}
+                                iframeClassName='w-full aspect-video'
+                                opts={{ playerVars: { autoplay: 1 } }}
+                            /> :
+                            <div className='flex flex-col items-center justify-center gap-5 bg-black w-full md:min-w-[550px] h-[180px] md:min-h-[250px] text-white'>
+                                <p className='text-center'>CLick the <span className='text-blue-500 italic'>Play</span> Link to View the Free Lecture Videos</p>
+                                <TbPlayerPlayFilled className='w-10 h-10 md:w-15 md:h-15 bg-blue-500 hover:bg-blue-400 rounded-full p-2 cursor-pointer ' onClick={() => setPlayerData(courseDetails?.courseContent[0]?.chapterContent[0])} />
+                            </div>
+                        }
+                    </div>
+                </div>
+            )}
+
+            {/* course rating */}
+            <div className='flex items-center gap-5 text-lg md:text-xl font-medium mt-5'>
+                <h2>Rate this course</h2>
+                <div className='flex gap-1 text-[25px] text-yellow-400 cursor-pointer'>
+                    <FaStar />
+                    <FaStar />
+                    <FaStar />
+                    <FaRegStarHalfStroke />
+                    <FaRegStar />
+                </div>
+            </div>
+        </div >
     )
 }
 

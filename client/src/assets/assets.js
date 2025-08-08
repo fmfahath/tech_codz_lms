@@ -215,7 +215,7 @@ export const dummyCourses = [
                         "lectureUrl": "https://youtu.be/PkZNo7MFNFg",
                         "isPreviewFree": false,
                         "lectureOrder": 3
-                    }
+                    },
                 ]
             },
             {

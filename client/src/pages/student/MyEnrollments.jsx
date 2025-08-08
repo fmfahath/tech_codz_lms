@@ -97,7 +97,7 @@ const MyEnrollments = () => {
                                     </td>
                                     <td className='max-sm:hidden px-4 md:py-2'>{enrolledCourse.courseDuration}</td>
                                     <td className='max-sm:hidden px-4 md:py-2'>{enrolledCourse.completedLectures}/{enrolledCourse.totalLectures} Lectures</td>
-                                    <td className='px-4 py-2'><button onClick={() => navigate(`player/${enrolledCourse.courseId}`)} className='max-w-full min-w-[110px] mx-auto text-sm md:text-default text-white px-2 py-1.5 bg-blue-500 rounded shadow cursor-pointer'>{enrolledCourse.courseStatus}</button></td>
+                                    <td className='px-4 py-2'><button onClick={() => navigate(`/player/${enrolledCourse.courseId}`)} className='max-w-full min-w-[110px] mx-auto text-sm md:text-default text-white px-2 py-1.5 bg-blue-500 rounded shadow cursor-pointer'>{enrolledCourse.courseStatus}</button></td>
                                 </tr>
                             ))
                             }
