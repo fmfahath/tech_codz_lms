@@ -17,6 +17,10 @@ import { MapPin } from "lucide-react";
 import { Database } from "lucide-react";
 import { PanelsTopLeft } from "lucide-react";
 import { PanelTop } from "lucide-react";
+import { House } from 'lucide-react';
+import { FolderPlus } from 'lucide-react';
+import { BookOpenCheck } from 'lucide-react';
+import { UsersRound } from 'lucide-react';
 import white_logo from "./white_logo.png";
 import black_logo from "./black_logo.png";
 import hero1 from "./hero1.png";
@@ -807,6 +811,13 @@ export const dummyStudentEnrolled = [
         },
         "purchaseDate": "2025-08-06T08:39:55.509Z"
     },
+]
+
+export const educatorDashboardMenu = [
+    { name: "Dashboard", path: '/educator', icon: House },
+    { name: "Add Course", path: '/educator/add-course', icon: FolderPlus },
+    { name: "My Courses", path: '/educator/my-courses', icon: BookOpenCheck },
+    { name: "Enrolled Students", path: '/educator/student-enrolled', icon: UsersRound }
 ]
 
 export const logo = { white_logo, black_logo }
