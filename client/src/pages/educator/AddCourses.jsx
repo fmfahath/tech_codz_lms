@@ -22,6 +22,7 @@ const AddCourses = () => {
     const [lectureDuration, setLectureDuration] = useState(0)
     const [lectureUrl, setLectureUrl] = useState("")
     const [lecturePreviewFree, setLecturePreviewFree] = useState(false)
+    const [openChapters, setOpenChapters] = useState({})
 
     //add chapter----------------
     const handlingChapter = (action, chapterId) => {
@@ -41,6 +42,12 @@ const AddCourses = () => {
 
             setChapters([...chapters, newChapter])
             setChapterTitle("")
+
+            //Automatically expand the chapter div
+            setOpenChapters(prev => ({
+                ...prev,
+                [newChapter.chapterId]: true
+            }))
         }
 
         else if (action === 'remove') {
@@ -100,6 +107,13 @@ const AddCourses = () => {
     const toggleLecturePopup = (chapterId) => {
         setCurrentChapterId(chapterId)
         setLecturePopup(prev => !prev)
+    }
+
+    // chater div - arrow toggle--------
+    const toggleChapterbox = (chapterId) => {
+        setOpenChapters(prev => (
+            { ...prev, [chapterId]: !prev[chapterId] }
+        ))
     }
 
     useEffect(() => {
@@ -163,15 +177,18 @@ const AddCourses = () => {
                     <div className='flex flex-col gap-2'>
                         {chapters && chapters.map((chapter, index) => (
                             <div key={index} className='bg-gray-300/30  overflow-hidden rounded'>
-                                <div className='flex items-center justify-between px-2 py-2 bg-gray-300/50  '>
+                                <div className='flex items-center justify-between px-2 py-2 bg-gray-300/50' onClick={() => toggleChapterbox(chapter.chapterId)}>
                                     <div className='flex items-center gap-2 cursor-pointer'>
-                                        <IoIosArrowDown />
-                                        <p className='w-100 truncate'>{chapter.chapterOrder + ". " + chapter.chapterTitle}</p>
+                                        <IoIosArrowDown className={`transition-transform duration-300 ${openChapters[chapter.chapterId] ? "rotate-[-90deg]" : "rotate-0"
+                                            }`} />
+                                        <p className='w-50 md:w-100 truncate'>{chapter.chapterOrder + ". " + chapter.chapterTitle}</p>
                                     </div>
                                     <FaWindowClose className='text-red-500 cursor-pointer' onClick={() => handlingChapter('remove', chapter.chapterId)} />
                                 </div>
+
                                 {/* add lecture */}
-                                <div className='flex flex-col p-2'>
+                                <div className={`flex flex-col transition-all duration-500 overflow-hidden ${openChapters[chapter.chapterId] ? "p-2 max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                                    }`}>
                                     {chapter.chapterContent && chapter.chapterContent.map((lecture, i) => (
                                         <div key={lecture.lectureId + "-" + i} className='flex  justify-between gap-2'>
                                             <div className=' '>
@@ -187,6 +204,7 @@ const AddCourses = () => {
 
                                     <button className='py-2 px-3 mt-4 ml-auto bg-gray-500/50 text-sm text-white rounded cursor-pointer' onClick={() => toggleLecturePopup(chapter.chapterId)}>+ Add Lecture</button>
                                 </div>
+
 
 
                             </div>
