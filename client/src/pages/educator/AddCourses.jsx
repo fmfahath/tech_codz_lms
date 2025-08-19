@@ -50,8 +50,50 @@ const AddCourses = () => {
     }
 
     //add lecture----------------
-    const handlingLecture = (action) => {
+    const handlingLecture = (action, chapterid, lectureId) => {
+        if (action === 'add') {
+            const newLecture = {
+                lectureId: uniqid(),
+                lectureTitle: lectureTitle,
+                lectureDuration: lectureDuration,
+                lectureUrl: lectureUrl,
+                isPreviewFree: lecturePreviewFree
+            }
 
+            //update chapters with new lecture
+            const updatedChapters = chapters.map(chapter => {
+                if (chapter.chapterId === currentChapterId) {
+                    return {
+                        ...chapter,
+                        chapterContent: [...chapter.chapterContent, newLecture]
+                    }
+                }
+                return chapter
+            })
+            setChapters(updatedChapters)
+
+            //reset lecture form
+            setLectureTitle("")
+            setLectureDuration(0)
+            setLectureUrl("")
+            setLecturePreviewFree(false)
+            setLecturePopup(prev => !prev)
+        }
+
+        else if (action === 'remove') {
+            const updatedChapters = chapters.map(chapter => {
+                if (chapter.chapterId === chapterid) {
+                    return {
+                        ...chapter,
+                        chapterContent: chapter.chapterContent.filter(lecture => lecture.lectureId !== lectureId)
+                    }
+                }
+
+                return chapter;
+            })
+
+            setChapters(updatedChapters)
+        }
     }
 
     //lecture popup----------------
@@ -138,7 +180,7 @@ const AddCourses = () => {
                                             <div className='flex items-center  gap-2 text-gray-500 '>
                                                 <p className='text-sm'>{lecture.lectureDuration} Minutes</p>
                                                 <Link to={lecture.lectureUrl} target='_blank' className='text-sm text-blue-400'>{lecture.isPreviewFree ? "Free Preview" : "Paid"}</Link>
-                                                <IoClose className='text-lg text-red-500 cursor-pointer' />
+                                                <IoClose className='text-lg text-red-500 cursor-pointer' onClick={() => handlingLecture('remove', chapter.chapterId, lecture.lectureId)} />
                                             </div>
                                         </div>
                                     ))}
