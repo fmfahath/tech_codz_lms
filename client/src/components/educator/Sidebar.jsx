@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 const Sidebar = () => {
     return (
-        <div className='w-16 md:w-55 min-h-screen flex flex-col border-r border-gray-300 bg-gray-100'>
+        <div className='w-16 md:w-55 h-full min-h-screen flex flex-col border-r border-gray-300 bg-gray-100'>
             {educatorDashboardMenu && educatorDashboardMenu.map((item, index) => (
                 <NavLink
                     to={item.path}

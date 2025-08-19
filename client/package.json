@@ -22,7 +22,7 @@
     "react-router-dom": "^7.6.3",
     "react-youtube": "^10.1.0",
     "tailwindcss": "^4.1.11",
-    "uniqueid": "^1.0.0"
+    "uniqid": "^5.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",

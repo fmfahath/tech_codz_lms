@@ -4,7 +4,7 @@ import Sidebar from '../../components/educator/Sidebar'
 
 const Educator = () => {
     return (
-        <div className='w-full min-h-screen pt-[30%] md:pt-[5%]'>
+        <div className='w-full h-full min-h-screen pt-[30%] md:pt-[5%] '>
             <p className='text-xl font-medium ml-5 my-5'>Admin Panel</p>
             <div className='flex border-t border-gray-300'>
                 {/* sidebar */}
