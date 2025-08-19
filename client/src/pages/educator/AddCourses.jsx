@@ -25,7 +25,28 @@ const AddCourses = () => {
 
     //add chapter----------------
     const handlingChapter = (action, chapterId) => {
+        if (action === 'add') {
 
+            if (chapterTitle.trim() === "") {
+                return 0;
+            }
+
+            const newChapter = {
+                chapterId: uniqid(),
+                // chapterOrder: chapters.length > 0 ? chapters.slice(-1)[0].chapterOrder + 1  : 1,
+                chapterOrder: chapters.length > 0 ? chapters[chapters.length - 1].chapterOrder + 1 : 1,
+                chapterTitle: chapterTitle,
+                chapterContent: []
+            }
+
+            setChapters([...chapters, newChapter])
+            setChapterTitle("")
+        }
+
+        else if (action === 'remove') {
+            const filteredChapters = chapters.filter(chapter => chapter.chapterId !== chapterId)
+            setChapters(filteredChapters)
+        }
     }
 
     //add lecture----------------
