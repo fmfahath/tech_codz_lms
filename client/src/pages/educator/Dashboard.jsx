@@ -33,7 +33,7 @@ const Dashboard = () => {
             {/* table */}
             <div className=''>
                 <h3 className='text-xl '>Latest Enrollments</h3>
-                <table className='w-auto min-w-[70%] mt-5 border border-gray-200 shadow rounded-lg'>
+                <table className='w-auto min-w-[80%] mt-5 border border-gray-200 shadow rounded-lg'>
                     <thead>
                         <tr className='text-left border-b border-gray-200'>
                             <th className='px-4 py-4  font-medium'>#</th>
