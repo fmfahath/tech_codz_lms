@@ -14,7 +14,7 @@ const MyCourses = () => {
     }
 
     return (
-        <div className='w-full min-h-screen px-4 py-2'>
+        <div className='w-full min-h-screen px-4 py-2 overflow-scroll'>
             <h3 className='text-xl '>My Courses</h3>
             <table className='w-auto min-w-[80%] mt-5 border border-gray-200 shadow rounded-lg'>
                 <thead>
@@ -32,11 +32,11 @@ const MyCourses = () => {
                             <td className='px-4 py-2 '>{index + 1}</td>
                             <td className='px-4 py-2 flex items-center gap-2'>
                                 <img src={course.courseThumbnail} alt="" className='w-25' />
-                                <p>{course.courseTitle}</p>
+                                <p className='text-nowrap overflow-hidden'>{course.courseTitle}</p>
                             </td>
-                            <td className='px-4 py-2 '>${calculateEarnings(course)}</td>
-                            <td className='px-4 py-2 '>{course.enrolledStudents.length}</td>
-                            <td className='px-4 py-2 '>{new Date(course.createdAt).toLocaleDateString("en-GB")}</td>
+                            <td className='px-4 py-2 text-nowrap'>${calculateEarnings(course)}</td>
+                            <td className='px-4 py-2 text-nowrap'>{course.enrolledStudents.length}</td>
+                            <td className='px-4 py-2 text-nowrap'>{new Date(course.createdAt).toLocaleDateString("en-GB")}</td>
                         </tr>
                     ))}
 

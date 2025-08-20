@@ -132,10 +132,10 @@ const AddCourses = () => {
 
     return (
         <div className='w-full '>
-            <form className='flex flex-col gap-4 max-w-[50%]' onSubmit={submitHandler}>
+            <form className='flex flex-col gap-4 w-full md:max-w-[50%]' onSubmit={submitHandler}>
 
                 {/* course title */}
-                <div className='flex flex-col gap-2'>
+                <div className='w-full flex flex-col gap-2'>
                     <label htmlFor="courseTitle">Course Title</label>
                     <input className='border border-gray-500 py-2 px-4 rounded outline-0' type="text" id='courseTitle' required />
                 </div>
@@ -143,7 +143,7 @@ const AddCourses = () => {
                 {/* course description  - quill Editor */}
                 <div className='flex flex-col gap-2 '>
                     <label htmlFor="courseDesc">Course Description</label>
-                    <div ref={editorRef} className=' h-[250px] border border-gray-300'>
+                    <div ref={editorRef} className=' h-[300px] border border-gray-300'>
 
                     </div>
                 </div>
@@ -177,9 +177,9 @@ const AddCourses = () => {
                 {/* add chapter */}
                 <div className='flex flex-col gap-2'>
                     <p>Add Chapters</p>
-                    <div className='flex gap-2 mb-5'>
+                    <div className='flex flex-col md:flex-row gap-2 mb-5'>
                         <input type='text' className='flex-1 border border-gray-400 py-2 px-4 rounded outline-0' value={chapterTitle} placeholder='Enter chapter heading' required onChange={(e) => setChapterTitle(e.target.value)} />
-                        <button className='py-2 px-3 bg-black/80 text-sm text-white rounded cursor-pointer' onClick={() => handlingChapter('add')}>Add Chapter</button>
+                        <button className='w-30 py-2 px-3 bg-black/80 text-sm text-white rounded cursor-pointer' onClick={() => handlingChapter('add')}>Add Chapter</button>
                     </div>
                     <div className='flex flex-col gap-2'>
                         {chapters && chapters.map((chapter, index) => (
@@ -202,7 +202,7 @@ const AddCourses = () => {
                                                 <p className='text-[15px] text-gray-700 '>{i + 1 + ". " + lecture.lectureTitle}</p>
                                             </div>
                                             <div className='flex items-center  gap-2 text-gray-500 '>
-                                                <p className='text-sm'>{lecture.lectureDuration} Minutes</p>
+                                                <p className='hidden md:block text-sm'>{lecture.lectureDuration} Minutes</p>
                                                 <Link to={lecture.lectureUrl} target='_blank' className='text-sm text-blue-400'>{lecture.isPreviewFree ? "Free Preview" : "Paid"}</Link>
                                                 <IoClose className='text-lg text-red-500 cursor-pointer' onClick={() => handlingLecture('remove', chapter.chapterId, lecture.lectureId)} />
                                             </div>
@@ -220,7 +220,7 @@ const AddCourses = () => {
                     </div>
                 </div>
 
-                <button className='max-w-40 py-3 px-4 btn-bg text-sm md:text-default text-white rounded cursor-pointer' onClick={submitHandler}>Add </button>
+                <button className='w-full md:max-w-40 py-3 px-4 btn-bg text-sm md:text-default text-white rounded cursor-pointer' onClick={submitHandler}>Add </button>
 
 
             </form>
