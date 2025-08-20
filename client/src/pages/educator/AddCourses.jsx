@@ -116,6 +116,13 @@ const AddCourses = () => {
         ))
     }
 
+    //form submit handler----------------
+    const submitHandler = (e) => {
+        e.preventDefault()
+
+
+    }
+
     useEffect(() => {
         if (!quillRef.current && editorRef.current) {
             quillRef.current = new Quill(editorRef.current, { theme: 'snow' })
@@ -125,7 +132,7 @@ const AddCourses = () => {
 
     return (
         <div className='w-full '>
-            <form className='flex flex-col gap-4 max-w-[50%]'>
+            <form className='flex flex-col gap-4 max-w-[50%]' onSubmit={submitHandler}>
 
                 {/* course title */}
                 <div className='flex flex-col gap-2'>
@@ -172,7 +179,7 @@ const AddCourses = () => {
                     <p>Add Chapters</p>
                     <div className='flex gap-2 mb-5'>
                         <input type='text' className='flex-1 border border-gray-400 py-2 px-4 rounded outline-0' value={chapterTitle} placeholder='Enter chapter heading' required onChange={(e) => setChapterTitle(e.target.value)} />
-                        <button className='py-2 px-3 bg-black text-sm text-white rounded cursor-pointer' onClick={() => handlingChapter('add')}>Add Chapter</button>
+                        <button className='py-2 px-3 bg-black/80 text-sm text-white rounded cursor-pointer' onClick={() => handlingChapter('add')}>Add Chapter</button>
                     </div>
                     <div className='flex flex-col gap-2'>
                         {chapters && chapters.map((chapter, index) => (
@@ -213,6 +220,9 @@ const AddCourses = () => {
                     </div>
                 </div>
 
+                <button className='max-w-40 py-3 px-4 btn-bg text-sm md:text-default text-white rounded cursor-pointer' onClick={submitHandler}>Add </button>
+
+
             </form>
             {/* add lecture popup */}
             {lecturePopup && (
@@ -229,7 +239,7 @@ const AddCourses = () => {
                             </div>
                             <div className='flex flex-col gap-2'>
                                 <label htmlFor="lectDur">Duration (Min)</label>
-                                <input className='border border-gray-500 py-2 px-4 rounded outline-0' type="number" id='lectDur' onChange={(e) => setLectureDuration(e.target.value)} value={lectureDuration} required />
+                                <input className='border border-gray-500 py-2 px-4 rounded outline-0' type="number" id='lectDur' min={0} placeholder='0' onChange={(e) => setLectureDuration(e.target.value)} value={lectureDuration} required />
                             </div>
                             <div className='flex flex-col gap-2'>
                                 <label htmlFor="lectUrl">Lecture Url</label>
