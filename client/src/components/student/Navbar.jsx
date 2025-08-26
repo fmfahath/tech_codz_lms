@@ -50,7 +50,6 @@ const Navbar = () => {
     }
 
 
-
     return (
         <div className='relative z-999'>
             <header className='h-16 text-[15px] fixed inset-0 flex-center'>
