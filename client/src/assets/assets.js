@@ -21,6 +21,14 @@ import { House } from 'lucide-react';
 import { FolderPlus } from 'lucide-react';
 import { BookOpenCheck } from 'lucide-react';
 import { UsersRound } from 'lucide-react';
+import { Brain } from "lucide-react";
+import { DatabaseZap } from "lucide-react";
+import { BrainCircuit } from "lucide-react";
+import { FolderCode } from "lucide-react";
+import { CloudUpload } from "lucide-react";
+import { ShieldBan } from "lucide-react";
+import { UserCog } from "lucide-react";
+import { BotMessageSquare } from "lucide-react";
 import white_logo from "./white_logo.png";
 import black_logo from "./black_logo.png";
 import hero1 from "./hero1.png";
@@ -32,132 +40,164 @@ import profile_img_3 from "./profile_img_3.png"
 
 export const Menus = [
     {
-        name: "Features",
-        subMenuHeading: ["Design", "Scale"],
+        name: "Courses",
+        subMenuHeading: ["Get started"],
         subMenu: [
             {
-                name: "Design",
-                desc: "Responsive design",
-                icon: PanelsTopLeft,
+                name: "Artificial Intelligence",
+                desc: "Explore AI tools and innovations",
+                icon: Brain,
             },
             {
-                name: "Management",
-                desc: "Site control",
-                icon: Bolt,
+                name: "Data Science",
+                desc: "Analyze and visualize data trends",
+                icon: DatabaseZap,
             },
             {
-                name: "Navigation",
-                desc: "Link pages",
-                icon: PanelTop,
+                name: "Machine Learning",
+                desc: "Build and train intelligent models",
+                icon: BrainCircuit,
             },
             {
-                name: "CMS",
-                desc: "Management content",
-                icon: Database,
+                name: "Software Engineering",
+                desc: "Design, develop, and optimize software",
+                icon: FolderCode,
             },
+            {
+                name: "Cloud Computing",
+                desc: "Deploy and scale applications in the cloud",
+                icon: CloudUpload,
+            },
+            {
+                name: "Cyber Security",
+                desc: "Protect systems and secure digital assets",
+                icon: ShieldBan,
+            },
+            {
+                name: "Information Management",
+                desc: "Organize, store, and manage information",
+                icon: UserCog,
+            },
+            {
+                name: "Robotics",
+                desc: "Innovate with automation and robotics",
+                icon: BotMessageSquare,
+            },
+
         ],
         gridCols: 2,
     },
     {
-        name: "Resources",
-        subMenuHeading: ["Get started", "Programs", "Recent"],
+        name: "Programs",
+        subMenuHeading: ["Overview", "Features"],
         subMenu: [
             {
-                name: "Markplace",
-                desc: "Browse templates",
-                icon: ShoppingBag,
+                name: "Bootcamps",
+                desc: "Intensive hands-on training programs",
+                icon: ShieldPlus,
             },
             {
-                name: "Meetups",
-                desc: "Upcoming events",
-                icon: MapPin,
+                name: "Webinars",
+                desc: "Live sessions with industry experts",
+                icon: Users,
             },
             {
-                name: "Updates",
-                desc: "Changelog",
-                icon: BellDot,
+                name: "Workshops",
+                desc: "Practical learning with real projects",
+                icon: Dessert,
             },
             {
-                name: "Academy",
-                desc: "Watch lessions",
-                icon: Play,
+                name: "LMS",
+                desc: "Manage courses and track learning",
+                icon: Lock,
             },
-            {
-                name: "Blog",
-                desc: "Posts",
-                icon: BookOpenText,
-            },
-            {
-                name: "Figma",
-                desc: "Plugin",
-                icon: Figma,
-            },
-            {
-                name: "Experts",
-                desc: "Jobs",
-                icon: BriefcaseBusiness,
-            },
-            {
-                name: "Gallery",
-                desc: "Images",
-                icon: Images,
-            },
+
         ],
-        gridCols: 3,
+        gridCols: 2,
     },
     {
         name: "Support",
         subMenu: [
             {
                 name: "Help",
-                desc: "Center",
+                desc: "Get support and FAQs",
                 icon: CircleHelp,
             },
             {
                 name: "Community",
-                desc: "Project help",
+                desc: "Connect and collaborate with peers",
                 icon: MessageCircle,
             },
             {
-                name: "Emergency",
-                desc: "Urgent issues",
+                name: "Careers",
+                desc: "Explore jobs and opportunities",
                 icon: TriangleAlert,
             },
         ],
         gridCols: 1,
     },
     {
-        name: "Enterprise",
-        subMenuHeading: ["Overview", "Features"],
-        subMenu: [
-            {
-                name: "Enterprise",
-                desc: "Overview",
-                icon: ShieldPlus,
-            },
-            {
-                name: "Collaboration",
-                desc: "Design together",
-                icon: Users,
-            },
-            {
-                name: "Customers",
-                desc: "Stories",
-                icon: Dessert,
-            },
-            {
-                name: "Security",
-                desc: "Your site secured",
-                icon: Lock,
-            },
-        ],
-        gridCols: 2,
+        name: 'Donald Jackman',
+        role: 'SWE 1 @ Amazon',
+        image: profile_img_1,
+        rating: 3.5,
+        feedback: 'I\'ve been using Imagify for nearly  user-friendly, making my work much easier.',
     },
     {
-        name: "Pricing",
+        name: 'Richard Nelson',
+        role: 'SWE 2 @ Samsung',
+        image: profile_img_2,
+        rating: 4,
+        feedback: 'The course was well-structured and easy to follow. I learned more in 4 weeks than I did in months on my own!'
     },
     {
-        name: "Contact",
+        name: 'James Washington',
+        role: 'SWE 2 @ Google',
+        image: profile_img_3,
+        rating: 4.5,
+        feedback: 'Amazing support and engaging lessons. I finally understand how coding works!'
+    },
+];
+
+export const dummyStudentEnrolled = [
+    {
+        "studentDetails": {
+            "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+            "name": "Fahath",
+            "imageUrl": profile_img_1
+        },
+        "courseDetails": {
+            "_id": "605c72efb3f1c2b1f8e4e1a1",
+            "lectureCompleted": 2,
+            "courseStatus": "On Going"
+        },
+        "purchaseDate": "2025-08-06T08:39:55.509Z"
+    },
+    {
+        "studentDetails": {
+            "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+            "name": "Fahath",
+            "imageUrl": profile_img_1
+        },
+        "courseDetails": {
+            "_id": "675ac1512100b91a6d9b8b24",
+            "lectureCompleted": 3,
+            "courseStatus": "Completed"
+        },
+        "purchaseDate": "2025-08-06T08:39:55.509Z"
+    },
+    {
+        "studentDetails": {
+            "_id": "user_2qjlgkAqIMpiR2flWIRzvWKtE0w",
+            "name": "David",
+            "imageUrl": profile_img_2
+        },
+        "courseDetails": {
+            "_id": "675ac1512100b91a6d9b8b24",
+            "lectureCompleted": 3,
+            "courseStatus": "Completed"
+        },
+        "purchaseDate": "2025-08-06T08:39:55.509Z"
     },
 ];
 

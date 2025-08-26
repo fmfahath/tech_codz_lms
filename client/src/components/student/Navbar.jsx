@@ -6,10 +6,11 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
 
-    const [isHover, setIsHover] = useState(false);
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [clicked, setClicked] = useState(null)
+    const [user, setUser] = useState(false)
+    const [educator, setEducator] = useState(false)
 
     const toggleDrawer = () => {
         setIsOpen(!isOpen);
@@ -56,7 +57,7 @@ const Navbar = () => {
                 <nav className='px-3.5 flex items-center justify-between gap-5 w-full mx-auto bg-black/85 text-white '>
                     {/* logo */}
                     <div>
-                        <Link to='/'><img src={logo.white_logo} alt="logo-img" className='w-25 h-15 p-1' /></Link>
+                        <Link to='/'><img src={logo.white_logo} alt="logo-img" className='w-25 h-15 p-1 cursor-pointer' /></Link>
                     </div>
 
                     {/* menu */}
