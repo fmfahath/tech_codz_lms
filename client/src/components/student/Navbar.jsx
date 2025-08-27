@@ -3,14 +3,15 @@ import { logo, Menus } from '../../assets/assets.js'
 import { ChevronDown, Menu, X } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { useClerk, UserButton, useUser } from '@clerk/clerk-react'
 
 const Navbar = () => {
 
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [clicked, setClicked] = useState(null)
-    const [user, setUser] = useState(false)
-    const [educator, setEducator] = useState(false)
+    const { openSignIn, openSignUp } = useClerk()
+    const { user } = useUser()
 
     const toggleDrawer = () => {
         setIsOpen(!isOpen);
@@ -97,8 +98,13 @@ const Navbar = () => {
                     </ul>
 
                     {/* sign in button/ */}
-                    <div className='flex items-center gap-x-5'>
-                        <button className='bg-white/10 z-[999] relative px-3 py-1.5 shadow rounded-xl flex-center cursor-pointer hover:bg-white/20'>Sign In</button>
+                    <div className='flex items-center gap-x-2'>
+                        {
+                            !user && <button onClick={() => openSignUp()} className='btn-bg z-[999] relative px-3 py-1.5 shadow rounded-xl flex-center cursor-pointer hover:bg-white/20'>Register</button>
+                        }
+                        {
+                            user ? <UserButton /> : <button onClick={() => openSignIn()} className='bg-white/10 z-[999] relative px-3 py-1.5 shadow rounded-xl flex-center cursor-pointer hover:bg-white/20'>Sign In</button>
+                        }
                         {/* mobile menu */}
                         <div className='lg:hidden relative z-[999]'>
                             <button className='cursor-pointer ' onClick={toggleDrawer}>{isOpen ? <X /> : <Menu />}</button>

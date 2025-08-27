@@ -14,7 +14,7 @@ if (!PUBLISHABLE_KEY) {
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY} >
       <AppCondextProvider>
         <App />
       </AppCondextProvider>

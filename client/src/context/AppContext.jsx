@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { dummyCourses } from "../assets/assets";
 
 export const AppContext = createContext()
@@ -22,7 +22,6 @@ export const AppCondextProvider = (props) => {
         const averageRating = courseData.courseRatings.reduce((acc, rating) => (acc + rating.rating), 0) / courseData.courseRatings.length;
         return averageRating;
     }
-
 
     const value = {
         allCourses, setAllCourses,
