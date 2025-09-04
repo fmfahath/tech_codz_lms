@@ -29,7 +29,7 @@ export const addNewCourse = async (req, res) => {
             return res.json({ success: false, message: "Course thumbnail is required" })
         }
 
-        const parsedCourseData = await JSON.parse(courseData)
+        const parsedCourseData = JSON.parse(courseData)
         parsedCourseData.educator = educatorId
 
         const newCourse = await courseModel.create(parsedCourseData)
