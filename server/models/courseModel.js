@@ -30,9 +30,9 @@ const courseSchema = new mongoose.Schema({
             rating: { type: Number, min: 1, max: 5 }
         }
     ],
-    educator: { type: String, ref: 'User', required: true },
+    educator: { type: String, required: true },
     enrolledStudents: [
-        { type: String, ref: 'User' }
+        { type: String }
     ],
 }, { timestamps: true, minimize: false });
 
