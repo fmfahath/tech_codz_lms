@@ -21,7 +21,7 @@ export const updateRoleToEducator = async (req, res) => {
 //add new course-----------------------------------------------------------------------------
 export const addNewCourse = async (req, res) => {
     try {
-        const courseData = req.body
+        const { courseData } = req.body
         const courseImageFile = req.file
         const educatorId = req.auth.userId
 
