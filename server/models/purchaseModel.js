@@ -25,4 +25,4 @@ const purchaseSchema = new mongoose.Schema({
 
 const purchaseModel = mongoose.model('Purchase', purchaseSchema)
 
-export default purchaseModel;
+export default purchaseModel; 
