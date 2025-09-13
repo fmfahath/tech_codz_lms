@@ -2,7 +2,7 @@
 import { clerkClient } from '@clerk/express'
 import courseModel from '../models/courseModel.js';
 import { v2 as cloudinary } from "cloudinary";
-import purchaseModel from '../models/purchaseMOdel.js';
+import purchaseModel from '../models/purchaseModel.js';
 import userModel from '../models/userModel.js';
 
 //update role from student to educator----------------------------------------------------
