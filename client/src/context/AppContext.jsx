@@ -1,11 +1,14 @@
 import { createContext, useEffect, useState } from "react";
 import { dummyCourses } from "../assets/assets";
+import { useAuth, useUser } from "@clerk/clerk-react";
 
 export const AppContext = createContext()
 
 export const AppCondextProvider = (props) => {
 
     const [allCourses, setAllCourses] = useState(dummyCourses);
+    const { getToken } = useAuth()
+    const { user } = useUser()
 
 
     //calculate course ratings----------------------------------------
@@ -22,6 +25,16 @@ export const AppCondextProvider = (props) => {
         const averageRating = courseData.courseRatings.reduce((acc, rating) => (acc + rating.rating), 0) / courseData.courseRatings.length;
         return averageRating;
     }
+
+    //get token ----------------------------------------------------
+    const logToken = async () => {
+        console.log(await getToken());
+    }
+
+
+    useEffect(() => {
+        if (user) logToken();
+    }, [user])
 
     const value = {
         allCourses, setAllCourses,
