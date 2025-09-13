@@ -2,7 +2,7 @@ import express from "express";
 import "dotenv/config";
 import cors from "cors";
 import connectDB from "./configs/mongodb.js";
-import { clerkWebhooks } from "./contollers/webhooks.js";
+import { clerkWebhooks, stripeWebhooks } from "./contollers/webhooks.js";
 import educatorRouter from "./routes/educatorRoutes.js";
 import { clerkMiddleware } from "@clerk/express";
 import connectCloudinary from "./configs/cloudinary.js";
@@ -15,6 +15,9 @@ const app = express();
 //connect database
 await connectDB()
 await connectCloudinary()
+
+// Stripe raw body middleware for this route ONLY
+app.post('/stripe', express.raw({ type: 'application/json' }), stripeWebhooks)
 
 //middleware
 app.use(express.json())

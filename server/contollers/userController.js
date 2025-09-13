@@ -45,7 +45,7 @@ export const purchaseCourse = async (req, res) => {
 
 
         if (!courseData || !userData) {
-            return res.json({ success: false, message: "Course data or user details not found!" })
+            return res.json({ success: false, message: "Course data or User details not found!" })
         }
 
         const purchaseData = {
