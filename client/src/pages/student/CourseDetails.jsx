@@ -10,11 +10,13 @@ import { MdOutlineSlowMotionVideo } from "react-icons/md";
 import YouTube from 'react-youtube'
 import humanizeDuration from 'humanize-duration'
 import { TbPlayerPlayFilled } from "react-icons/tb";
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const CourseDetails = () => {
 
     const { id } = useParams()
-    const { allCourses, calculateRating } = useContext(AppContext)
+    const { allCourses, calculateRating, backendUrl } = useContext(AppContext)
     const [courseData, setCourseData] = useState(null)
     const [stars, setStars] = useState({ full: 0, half: 0, empty: 0 })
     const [rating, setRating] = useState(0)
@@ -35,7 +37,20 @@ const CourseDetails = () => {
 
     //fetching course's data------------------
     const fetchCourseData = async () => {
-        setCourseData(await allCourses.find(course => (course._id === id)))
+        // setCourseData(await allCourses.find(course => (course._id === id)))
+
+        try {
+            const { data } = await axios.get(`${backendUrl}/course/${id}`)
+
+            if (data.success) {
+                setCourseData(data.courseData)
+            }
+            else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
     }
 
     // calculate chapter-------------------
