@@ -12,6 +12,8 @@ export const AppCondextProvider = (props) => {
     const { getToken } = useAuth()
     const { user } = useUser()
     const backendUrl = import.meta.env.VITE_BACKEND_URL
+    const [userData, setUserData] = useState(null)
+    const [isEducator, setIsEducator] = useState(false)
 
     //fetch all courses-----------------------------------------------
     const fetchAllCourses = async () => {
@@ -21,6 +23,28 @@ export const AppCondextProvider = (props) => {
             if (data.success) {
                 setAllCourses(data.coursesData)
             } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    //fetch user data------------------------------------------------
+    const fetchUserData = async () => {
+
+        if (user.publicMetadata.role === 'educator') {
+            setIsEducator(true)
+        }
+
+        try {
+            const token = await getToken()
+            const { data } = await axios.get(`${backendUrl}/user-data`, { headers: { Authorization: `Bearer ${token}` } })
+
+            if (data.success) {
+                setUserData(data.userData)
+            }
+            else {
                 toast.error(data.message)
             }
         } catch (error) {
@@ -43,14 +67,10 @@ export const AppCondextProvider = (props) => {
         return averageRating;
     }
 
-    //get token ----------------------------------------------------
-    const logToken = async () => {
-        console.log(await getToken());
-    }
-
-
     useEffect(() => {
-        if (user) logToken();
+        if (user) {
+            fetchUserData()
+        }
     }, [user])
 
     useEffect(() => {
@@ -59,7 +79,8 @@ export const AppCondextProvider = (props) => {
 
     const value = {
         allCourses, setAllCourses,
-        calculateRating,
+        calculateRating, userData, setUserData, backendUrl, getToken,
+        fetchAllCourses
     }
 
     return (
