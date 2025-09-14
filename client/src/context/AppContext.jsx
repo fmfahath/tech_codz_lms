@@ -14,6 +14,7 @@ export const AppCondextProvider = (props) => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL
     const [userData, setUserData] = useState(null)
     const [isEducator, setIsEducator] = useState(false)
+    const [enrolledCourses, setEnrolledCourses] = useState(null)
 
     //fetch all courses-----------------------------------------------
     const fetchAllCourses = async () => {
@@ -52,6 +53,23 @@ export const AppCondextProvider = (props) => {
         }
     }
 
+    //fetch user enrolled courses-------------------------------------
+    const fetchUserEnrolledCourses = async () => {
+        try {
+            const token = await getToken()
+            const { data } = await axios.get(`${backendUrl}/user-enrolled-courses`, { headers: { Authorization: `Bearer ${token}` } })
+
+            if (data.success) {
+                setEnrolledCourses(data.enrolledCourseData.reverse())
+            }
+            else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
     //calculate course ratings----------------------------------------
     const calculateRating = (courseData) => {
 
@@ -70,6 +88,7 @@ export const AppCondextProvider = (props) => {
     useEffect(() => {
         if (user) {
             fetchUserData()
+            fetchUserEnrolledCourses()
         }
     }, [user])
 
@@ -78,9 +97,9 @@ export const AppCondextProvider = (props) => {
     }, [])
 
     const value = {
-        allCourses, setAllCourses,
+        allCourses, setAllCourses, isEducator,
         calculateRating, userData, setUserData, backendUrl, getToken,
-        fetchAllCourses
+        fetchAllCourses, enrolledCourses
     }
 
     return (
