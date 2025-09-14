@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { logo, Menus } from '../../assets/assets.js'
 import { ChevronDown, Menu, X } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useClerk, UserButton, useUser } from '@clerk/clerk-react'
+import { AppContext } from '../../context/AppContext.jsx'
+import { MonitorCog, LibraryBig } from "lucide-react";
 
 const Navbar = () => {
 
@@ -12,6 +14,7 @@ const Navbar = () => {
     const [clicked, setClicked] = useState(null)
     const { openSignIn, openSignUp } = useClerk()
     const { user } = useUser()
+    const { userData, isEducator } = useContext(AppContext)
 
     const toggleDrawer = () => {
         setIsOpen(!isOpen);
@@ -98,12 +101,18 @@ const Navbar = () => {
                     </ul>
 
                     {/* sign in button/ */}
-                    <div className='flex items-center gap-x-2'>
+                    <div className='flex items-center gap-x-3'>
                         {
-                            !user && <button onClick={() => openSignUp()} className='btn-bg z-[999] relative px-3 py-1.5 shadow rounded-xl flex-center cursor-pointer hover:bg-white/20'>Register</button>
+                            !isEducator && <div className='flex items-center justify-center gap-3 text-white/50 hover:text-white cursor-pointer'><Link className='flex items-center justify-center gap-2' to={'/educator'}><p className='hidden lg:block'>Dashboard</p><MonitorCog /></Link><span className='text-white/80 text-xl font-extralight'>|</span></div>
                         }
                         {
-                            user ? <UserButton /> : <button onClick={() => openSignIn()} className='bg-white/10 z-[999] relative px-3 py-1.5 shadow rounded-xl flex-center cursor-pointer hover:bg-white/20'>Sign In</button>
+                            userData && <div className=' text-white/50 hover:text-white cursor-pointer'><Link className='flex items-center justify-center gap-2' to={'/my-enrollments'}><p className='hidden lg:block'> My Enrollments</p><LibraryBig /></Link></div>
+                        }
+                        {
+                            !userData && <button onClick={() => openSignUp()} className='btn-bg z-[999] relative px-3 py-1.5 shadow rounded-xl flex-center cursor-pointer hover:bg-white/20'>Register</button>
+                        }
+                        {
+                            userData ? <UserButton /> : <button onClick={() => openSignIn()} className='bg-white/10 z-[999] relative px-3 py-1.5 shadow rounded-xl flex-center cursor-pointer hover:bg-white/20'>Sign In</button>
                         }
                         {/* mobile menu */}
                         <div className='lg:hidden relative z-[999]'>
@@ -151,7 +160,7 @@ const Navbar = () => {
 
                 </nav>
             </header>
-        </div>
+        </div >
     )
 }
 
