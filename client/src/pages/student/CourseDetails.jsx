@@ -16,12 +16,13 @@ import { toast } from 'react-toastify';
 const CourseDetails = () => {
 
     const { id } = useParams()
-    const { allCourses, calculateRating, backendUrl } = useContext(AppContext)
+    const { allCourses, calculateRating, backendUrl, userData, getToken } = useContext(AppContext)
     const [courseData, setCourseData] = useState(null)
     const [stars, setStars] = useState({ full: 0, half: 0, empty: 0 })
     const [rating, setRating] = useState(0)
     const [toggle, setToggle] = useState({})
     const [playerData, setPlayerData] = useState(null)
+    const [alreadyEnrolled, setAlreadyEnrolled] = useState(false)
 
 
     //rating stars------------------------
@@ -66,6 +67,35 @@ const CourseDetails = () => {
         setToggle((prev) => ({ ...prev, [index]: !prev[index] }))
     }
 
+    //enroll into course---------------------
+    const enrolleCourse = async () => {
+        try {
+            if (!userData) {
+                return toast.warn("Login to enroll the course!")
+            }
+            if (alreadyEnrolled) {
+                return toast.warn("Already Enrolled")
+            }
+
+            const token = await getToken()
+            const { data } = await axios.post(`${backendUrl}/user/purchase`,
+                { courseId: courseData._id },
+                { headers: { Authorization: `Bearer ${token}` } }
+            )
+
+            if (data.success) {
+                const { session_url } = data
+                window.location.replace(session_url)
+            }
+            else {
+                toast.error(data.message)
+            }
+
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
     useEffect(() => {
         if (allCourses && allCourses.length > 0) {
             fetchCourseData()
@@ -76,6 +106,7 @@ const CourseDetails = () => {
     useEffect(() => {
         if (courseData) {
             ratingStar()
+            setAlreadyEnrolled(courseData.enrolledStudents.includes(userData._id))
         }
     }, [courseData])
 
@@ -113,7 +144,9 @@ const CourseDetails = () => {
                         <p className='line-through'>${courseData?.coursePrice}</p>
                         <p className=''>{courseData?.discount}% off</p>
                     </div>
-                    <Link to='#' className='flex items-center justify-between gap-2 btn-bg py-2 px-4 mt-4 md:text-lg shadow-lg'>Enroll Now <RiArrowRightDoubleLine /></Link>
+                    <Link onClick={enrolleCourse} className={`flex items-center justify-between gap-2 btn-bg py-2 px-4 mt-4 md:text-lg shadow-lg 
+                     ${alreadyEnrolled ? "cursor-not-allowed opacity-50" : ""}`}>{alreadyEnrolled ? "Already Enrolled" : <>Enroll Now <RiArrowRightDoubleLine /></>}
+                    </Link>
                 </div>
             </div>
 
