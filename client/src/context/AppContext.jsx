@@ -97,7 +97,7 @@ export const AppCondextProvider = (props) => {
     }, [])
 
     const value = {
-        allCourses, setAllCourses, isEducator,
+        allCourses, setAllCourses, isEducator, setIsEducator,
         calculateRating, userData, setUserData, backendUrl, getToken,
         fetchAllCourses, enrolledCourses
     }
