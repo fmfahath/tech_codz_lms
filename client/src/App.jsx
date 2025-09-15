@@ -13,6 +13,7 @@ import MyEnrollments from './pages/student/MyEnrollments'
 import Navbar from './components/student/Navbar'
 import { useEffect } from 'react'
 import Footer from './components/student/Footer'
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
   return (
     <div>
       <Navbar />
+      <ToastContainer />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/course-list' element={<CourseList />} />

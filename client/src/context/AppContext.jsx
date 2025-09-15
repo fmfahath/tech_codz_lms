@@ -1,15 +1,74 @@
 import { createContext, useEffect, useState } from "react";
 import { dummyCourses } from "../assets/assets";
 import { useAuth, useUser } from "@clerk/clerk-react";
+import axios from 'axios'
+import { toast } from "react-toastify";
 
 export const AppContext = createContext()
 
 export const AppCondextProvider = (props) => {
 
-    const [allCourses, setAllCourses] = useState(dummyCourses);
+    const [allCourses, setAllCourses] = useState('');
     const { getToken } = useAuth()
     const { user } = useUser()
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
+    const [userData, setUserData] = useState(null)
+    const [isEducator, setIsEducator] = useState(false)
+    const [enrolledCourses, setEnrolledCourses] = useState(null)
 
+    //fetch all courses-----------------------------------------------
+    const fetchAllCourses = async () => {
+        try {
+            const { data } = await axios.get(`${backendUrl}/course/all`)
+
+            if (data.success) {
+                setAllCourses(data.coursesData)
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    //fetch user data------------------------------------------------
+    const fetchUserData = async () => {
+
+        if (user.publicMetadata.role === 'educator') {
+            setIsEducator(true)
+        }
+
+        try {
+            const token = await getToken()
+            const { data } = await axios.get(`${backendUrl}/user/user-data`, { headers: { Authorization: `Bearer ${token}` } })
+
+            if (data.success) {
+                setUserData(data.userData)
+            }
+            else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    //fetch user enrolled courses-------------------------------------
+    const fetchUserEnrolledCourses = async () => {
+        try {
+            const token = await getToken()
+            const { data } = await axios.get(`${backendUrl}/user/user-enrolled-courses`, { headers: { Authorization: `Bearer ${token}` } })
+
+            if (data.success) {
+                setEnrolledCourses(data.enrolledCourseData.reverse())
+            }
+            else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
 
     //calculate course ratings----------------------------------------
     const calculateRating = (courseData) => {
@@ -26,19 +85,21 @@ export const AppCondextProvider = (props) => {
         return averageRating;
     }
 
-    //get token ----------------------------------------------------
-    const logToken = async () => {
-        console.log(await getToken());
-    }
-
-
     useEffect(() => {
-        if (user) logToken();
+        if (user) {
+            fetchUserData()
+            fetchUserEnrolledCourses()
+        }
     }, [user])
 
+    useEffect(() => {
+        fetchAllCourses()
+    }, [])
+
     const value = {
-        allCourses, setAllCourses,
-        calculateRating,
+        allCourses, setAllCourses, isEducator, setIsEducator,
+        calculateRating, userData, setUserData, backendUrl, getToken,
+        fetchAllCourses, enrolledCourses
     }
 
     return (

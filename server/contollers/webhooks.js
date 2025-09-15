@@ -3,6 +3,7 @@ import userModel from "../models/userModel.js";
 import Stripe from "stripe";
 import purchaseModel from "../models/purchaseModel.js";
 import courseModel from "../models/courseModel.js";
+import courseProgressModel from "../models/courseProgress.js";
 
 
 //clerk's webhook controller------------------------------------
@@ -95,14 +96,20 @@ export const stripeWebhooks = async (req, res) => {
             const userData = await userModel.findById(purchaseData.userId)
             const courseData = await courseModel.findById(purchaseData.courseId.toString());
 
+            //update course data
             courseData.enrolledStudents.push(userData._id);
             await courseData.save();
 
+            //update user data
             userData.enrolledCourses.push(courseData._id);
             await userData.save();
 
+            //update puchase data
             purchaseData.status = 'completed';
             await purchaseData.save();
+
+            //add course progress
+            await courseProgressModel.create({ userId: userData._id, courseId: courseData._id })
 
             break;
         }

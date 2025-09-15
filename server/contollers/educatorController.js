@@ -14,7 +14,7 @@ export const updateRoleToEducator = async (req, res) => {
             publicMetadata: { role: 'educator' }
         })
 
-        res.json({ success: true, message: "Role updated to educator. Please re-login to see the changes." })
+        res.json({ success: true, message: "Role updated to educator. You can publish courses now!" })
     } catch (error) {
         res.json({ success: false, message: error.message })
     }
