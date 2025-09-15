@@ -104,11 +104,11 @@ const CourseDetails = () => {
     }, [id, allCourses])
 
     useEffect(() => {
-        if (courseData) {
+        if (userData && courseData) {
             ratingStar()
             setAlreadyEnrolled(courseData.enrolledStudents.includes(userData._id))
         }
-    }, [courseData])
+    }, [courseData, userData])
 
 
     return (
