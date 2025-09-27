@@ -16,6 +16,7 @@ export const AppCondextProvider = (props) => {
     const [isEducator, setIsEducator] = useState(false)
     const [enrolledCourses, setEnrolledCourses] = useState(null)
 
+
     //fetch all courses-----------------------------------------------
     const fetchAllCourses = async () => {
         try {
@@ -99,8 +100,9 @@ export const AppCondextProvider = (props) => {
     const value = {
         allCourses, setAllCourses, isEducator, setIsEducator,
         calculateRating, userData, setUserData, backendUrl, getToken,
-        fetchAllCourses, enrolledCourses
+        fetchAllCourses, fetchUserEnrolledCourses, enrolledCourses
     }
+
 
     return (
         <AppContext.Provider value={value}>
