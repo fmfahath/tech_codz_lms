@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AppContext } from '../../context/AppContext';
 import axios from 'axios';
+import Loading from '../../components/student/Loading';
 
 const AddCourses = () => {
 
@@ -28,7 +29,7 @@ const AddCourses = () => {
     const [lectureUrl, setLectureUrl] = useState("")
     const [lecturePreviewFree, setLecturePreviewFree] = useState(false)
     const [openChapters, setOpenChapters] = useState({})
-    const { backendUrl, getToken } = useContext(AppContext)
+    const { backendUrl, getToken, userData } = useContext(AppContext)
     const [courseAddingStatus, setCourseAddingStatus] = useState(false)
 
     //add chapter----------------
@@ -180,10 +181,10 @@ const AddCourses = () => {
         if (!quillRef.current && editorRef.current) {
             quillRef.current = new Quill(editorRef.current, { theme: 'snow' })
         }
-    }, [])
+    }, [userData])
 
 
-    return (
+    return userData ? (
         <div className='w-full '>
             <form className='flex flex-col gap-4 w-full md:max-w-[50%]' onSubmit={submitHandler}>
 
@@ -222,7 +223,7 @@ const AddCourses = () => {
                         </label>
                     </div>
                     <div className='flex items-center  gap-5 mt-2 '>
-                        <img src={image ? URL.createObjectURL(image) : null} alt="" className='w-15 h-15' />
+                        <img src={image ? URL.createObjectURL(image) : null} alt="" className='w-25 h-15' />
                         <input type="file" id='courseThumImg' accept='image/*' className='text-sm text-gray-400 cursor-pointer' onChange={(e) => setImage(e.target.files[0])} />
                     </div>
                 </div>
@@ -306,7 +307,7 @@ const AddCourses = () => {
                 </div>
             )}
         </div>
-    )
+    ) : (<Loading />)
 }
 
 export default AddCourses

@@ -61,31 +61,33 @@ const Dashboard = () => {
             </div>
 
             {/* table */}
-            <div className='w-full  overflow-scroll md:overflow-hidden'>
+            <div className='w-full  '>
                 <h3 className='text-xl '>Latest Enrollments</h3>
-                <table className='w-full md:w-auto md:min-w-[80%] mt-5 border border-gray-200 shadow rounded-lg'>
-                    <thead>
-                        <tr className='text-left border-b border-gray-200'>
-                            <th className='px-4 py-4  font-medium'>#</th>
-                            <th className='px-4 py-4 font-medium'>Student Name</th>
-                            <th className='px-4 py-4 font-medium'>Course Title</th>
-                            {/* <th className='px-4 py-4  font-medium'>Date</th> */}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {dashboardData && dashboardData.enrolledStudentsData.map((student, index) => (
-                            <tr key={index} className=' border border-gray-200'>
-                                <td className='px-4 py-2'>{index + 1}</td>
-                                <td className='px-4 py-2 '>
-                                    <div className='flex items-center gap-3'>
-                                        <img className='w-10 h-10 rounded-full' src={student.student.imageUrl} alt="" /><p>{student.student.name}</p>
-                                    </div>
-                                </td>
-                                <td className='px-4 py-2 '>{student.courseTitle}</td>
+                <div className='w-full overflow-scroll md:overflow-hidden'>
+                    <table className='w-full md:w-auto md:min-w-[80%] mt-5 border border-gray-200 shadow rounded-lg'>
+                        <thead>
+                            <tr className='text-left border-b border-gray-200'>
+                                <th className='px-4 py-4  font-medium'>#</th>
+                                <th className='px-4 py-4 font-medium'>Student Name</th>
+                                <th className='px-4 py-4 font-medium'>Course Title</th>
+                                {/* <th className='px-4 py-4  font-medium'>Date</th> */}
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {dashboardData && dashboardData.enrolledStudentsData.map((student, index) => (
+                                <tr key={index} className=' border border-gray-200'>
+                                    <td className='px-4 py-2'>{index + 1}</td>
+                                    <td className='pr-10 pl-4 md:px-4 py-2 '>
+                                        <div className='flex items-center gap-3'>
+                                            <img className='w-10 h-10 rounded-full ' src={student.student.imageUrl} alt="" /><p className='whitespace-nowrap'>{student.student.name}</p>
+                                        </div>
+                                    </td>
+                                    <td className='px-4 py-2 whitespace-nowrap'>{student.courseTitle}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     ) : (<Loading />)
