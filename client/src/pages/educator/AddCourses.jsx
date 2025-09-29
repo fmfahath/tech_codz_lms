@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Quill from 'quill'
 import uniqid from 'uniqid'
 import 'quill/dist/quill.snow.css'
@@ -7,12 +7,17 @@ import { IoIosArrowDown } from "react-icons/io";
 import { FaWindowClose } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { Link } from 'react-router-dom';
-import { logo } from '../../assets/assets';
+import { toast } from 'react-toastify';
+import { AppContext } from '../../context/AppContext';
+import axios from 'axios';
 
 const AddCourses = () => {
 
     const quillRef = useRef(null)
     const editorRef = useRef(null)
+    const [courseTitle, setCourseTitle] = useState("")
+    const [coursePrice, setCoursePrice] = useState(0)
+    const [courseDiscount, setCourseDiscount] = useState(0)
     const [image, setImage] = useState(null)
     const [chapterTitle, setChapterTitle] = useState("")
     const [chapters, setChapters] = useState([])
@@ -23,6 +28,8 @@ const AddCourses = () => {
     const [lectureUrl, setLectureUrl] = useState("")
     const [lecturePreviewFree, setLecturePreviewFree] = useState(false)
     const [openChapters, setOpenChapters] = useState({})
+    const { backendUrl, getToken } = useContext(AppContext)
+    const [courseAddingStatus, setCourseAddingStatus] = useState(false)
 
     //add chapter----------------
     const handlingChapter = (action, chapterId) => {
@@ -77,6 +84,8 @@ const AddCourses = () => {
                 }
                 return chapter
             })
+
+            //set updated chaters
             setChapters(updatedChapters)
 
             //reset lecture form
@@ -109,7 +118,7 @@ const AddCourses = () => {
         setLecturePopup(prev => !prev)
     }
 
-    // chater div - arrow toggle--------
+    // chapter div - arrow toggle--------
     const toggleChapterbox = (chapterId) => {
         setOpenChapters(prev => (
             { ...prev, [chapterId]: !prev[chapterId] }
@@ -117,10 +126,54 @@ const AddCourses = () => {
     }
 
     //form submit handler----------------
-    const submitHandler = (e) => {
-        e.preventDefault()
+    const submitHandler = async (e) => {
+        try {
+            e.preventDefault()
 
+            //disbale add button after clicked
+            setCourseAddingStatus(true)
 
+            if (!image) {
+                toast.error('Thumbnail not selected')
+                setCourseAddingStatus(false)
+                return;
+            }
+
+            const courseData = {
+                courseTitle,
+                courseDescription: quillRef.current.root.innerHTML,
+                coursePrice: Number(coursePrice),
+                discount: Number(courseDiscount),
+                courseContent: chapters,
+            }
+
+            const formData = new FormData()
+            formData.append('courseData', JSON.stringify(courseData))
+            formData.append('image', image)
+
+            const token = await getToken()
+            const { data } = await axios.post(`${backendUrl}/educator/add-course`,
+                formData,
+                { headers: { Authorization: `Bearer ${token}` } })
+
+            if (data.success) {
+                toast.success(data.message)
+                setCourseTitle("")
+                quillRef.current.root.innerHTML = ""
+                setCoursePrice(0)
+                setCourseDiscount(0)
+                setImage(null)
+                setChapters([])
+                setCourseAddingStatus(false)
+            }
+            else {
+                toast.error(data.message)
+                setCourseAddingStatus(false)
+            }
+
+        } catch (error) {
+            toast.error(error.message)
+        }
     }
 
     useEffect(() => {
@@ -137,7 +190,7 @@ const AddCourses = () => {
                 {/* course title */}
                 <div className='w-full flex flex-col gap-2'>
                     <label htmlFor="courseTitle">Course Title</label>
-                    <input className='border border-gray-500 py-2 px-4 rounded outline-0' type="text" id='courseTitle' required />
+                    <input className='border border-gray-500 py-2 px-4 rounded outline-0' type="text" id='courseTitle' required onChange={(e) => setCourseTitle(e.target.value)} value={courseTitle} />
                 </div>
 
                 {/* course description  - quill Editor */}
@@ -152,11 +205,11 @@ const AddCourses = () => {
                 <div className='flex gap-4'>
                     <div className='flex flex-col gap-2'>
                         <label htmlFor="coursePrice">Course Price</label>
-                        <input className='w-28 border border-gray-400 py-2 px-4 rounded outline-0' type="number" id='coursePrice' placeholder='0' required />
+                        <input className='w-28 border border-gray-400 py-2 px-4 rounded outline-0' type="number" id='coursePrice' placeholder='0' required onChange={(e) => setCoursePrice(e.target.value)} value={coursePrice} />
                     </div>
                     <div className='flex flex-col gap-2'>
                         <label htmlFor="courseDisc">Discount %</label>
-                        <input className='w-28 border border-gray-400 py-2 px-4 rounded outline-0' type="number" id='courseDisc' min={0} max={100} placeholder='0' required />
+                        <input className='w-28 border border-gray-400 py-2 px-4 rounded outline-0' type="number" id='courseDisc' min={0} max={100} placeholder='0' required onChange={(e) => setCourseDiscount(e.target.value)} value={courseDiscount} />
                     </div>
                 </div>
 
@@ -164,13 +217,13 @@ const AddCourses = () => {
                 <div className='mb-5'>
                     <div className='flex items-center gap-2'>
                         <p>Upload Thumbnail Image</p>
-                        <label htmlFor="courseThumImg">
+                        <label htmlFor="courseThumImg" className='cursor-pointer'>
                             <FaCloudUploadAlt className='text-4xl text-blue-500' />
                         </label>
                     </div>
-                    <div className='flex items-center  gap-5 mt-2'>
+                    <div className='flex items-center  gap-5 mt-2 '>
                         <img src={image ? URL.createObjectURL(image) : null} alt="" className='w-15 h-15' />
-                        <input type="file" id='courseThumImg' accept='image/*' className='text-sm text-gray-400' onChange={(e) => setImage(e.target.files[0])} />
+                        <input type="file" id='courseThumImg' accept='image/*' className='text-sm text-gray-400 cursor-pointer' onChange={(e) => setImage(e.target.files[0])} />
                     </div>
                 </div>
 
@@ -211,19 +264,17 @@ const AddCourses = () => {
 
                                     <button className='py-2 px-3 mt-4 ml-auto bg-gray-500/50 text-sm text-white rounded cursor-pointer' onClick={() => toggleLecturePopup(chapter.chapterId)}>+ Add Lecture</button>
                                 </div>
-
-
-
                             </div>
                         )
                         )}
                     </div>
                 </div>
 
-                <button className='w-full md:max-w-40 py-3 px-4 btn-bg text-sm md:text-default text-white rounded cursor-pointer' onClick={submitHandler}>Add </button>
+                <button className={`w-full md:max-w-40 py-3 px-4 btn-bg text-sm md:text-default text-white rounded cursor-pointer ${courseAddingStatus ? "cursor-not-allowed opacity-50" : ""}`} onClick={submitHandler} >{courseAddingStatus ? "Loading.." : "Add"} </button>
 
 
             </form>
+
             {/* add lecture popup */}
             {lecturePopup && (
                 <div className='fixed inset-0 flex items-center justify-center bg-black/50'>
