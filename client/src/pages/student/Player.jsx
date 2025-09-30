@@ -167,7 +167,7 @@ const Player = () => {
                 </div>
 
                 {/* player */}
-                <div className='w-auto mt-5 md:mt-0  '>
+                <div className='w-auto md:w-[45%] mt-5 md:mt-0  '>
                     {playerData ?
                         (<div className='w-full]'>
                             <YouTube
