@@ -181,7 +181,7 @@ const Player = () => {
                                 iframeClassName='w-full aspect-video'
                             />
                             <div className='flex flex-col md:flex-row items-start md:items-center justify-start md:justify-between gap-2 mt-2'>
-                                <p className='text-blue-700 md:w-110 truncate text-wrap md:text-nowrap'>{playerData.lectureTitle} </p>
+                                <p className='text-blue-700 md:w-100 truncate text-wrap md:text-nowrap'>{playerData.lectureTitle} </p>
                                 <button className='bg-blue-500 px-2 py-1 rounded shadow-lg text-white text-sm cursor-pointer hover:bg-blue-600' onClick={() => markAsLectureCompleted(playerData.lectureId)}>Mark as Completed</button>
                             </div>
                         </div>
