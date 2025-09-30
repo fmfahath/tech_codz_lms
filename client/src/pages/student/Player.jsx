@@ -92,18 +92,17 @@ const Player = () => {
                                 <IoIosArrowDown className={`transform transition-transform  ${toggle[index] ? "rotate-180" : ""}`} />
                                 <p className='font-medium'>{chapter.chapterTitle}</p>
                             </div>
-                            <div className={`${toggle[index] ? "max-h-96" : "max-h-0"} overflow-hidden transition-all duration-300 ease-in-out`}>
+                            <div className={`w-full ${toggle[index] ? "max-h-96" : "max-h-0"} overflow-hidden transition-all duration-300 ease-in-out `}>
                                 {chapter.chapterContent.map((lecture, i) => (
-                                    <div key={i} className='flex items-center justify-between gap-5 pl-2 md:pl-5 text-gray-700 mt-2 '>
-                                        <div className='w-auto flex items-start gap-2 '>
+                                    <div key={i} className='flex  md:flex-row items-center justify-between gap-5 pl-2 md:pl-5 text-gray-700 mt-2 '>
+                                        <div className='md:w-auto flex items-start gap-2 '>
                                             {/* <IoCheckmarkDoneCircleOutline /> */}
                                             <IoCheckmarkDoneCircleSharp className='text-blue-500' />
-                                            <p className='w-70 md:w-auto truncate'>{lecture.lectureTitle}</p>
+                                            <p className='w-55 md:min-w-100 truncate'>{lecture.lectureTitle}</p>
                                         </div>
-                                        <div className='md:w-[35%] flex items-start justify-end md:justify-start gap-5 '>
+                                        <div className='md:w-[30%] flex items-start justify-end md:justify-start gap-5 '>
                                             <Link
                                                 className='text-blue-500'
-                                                // onClick={() => setPlayerData({ ...lecture, chapterId: index + 1, lectudeId: i + 1 })}
                                                 onClick={() => setPlayerData(getYoutubeData(lecture.lectureUrl))}
                                             >Play
                                             </Link>
