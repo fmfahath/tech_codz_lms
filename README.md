@@ -50,6 +50,7 @@ It provides a complete solution for learners and instructors to manage courses o
 - **Clerk** → User Authentication
 - **Cloudinary** → Image/File Upload
 - **Vercel** → Hosting (Frontend & Backend)
+- **Postman** → API Testing 
 
 ---
 
