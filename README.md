@@ -6,7 +6,7 @@ This is a **Learning Management System (LMS)** built with the **MERN Stack**.
 It provides a complete solution for learners and instructors to manage courses online.
 
 <p align="">
-  <a href="https://your-vercel-url.vercel.app" target="_blank">
+  <a href="https://tech-codz-lms-client.vercel.app" target="_blank">
     <img src="https://img.shields.io/badge/🔴 Vercel Live-E53935?style=for-the-badge&logo=vercel&logoColor=white&labelColor=E53935" alt="Vercel Live" style="border-radius:12px;">
   </a>
 </p>
