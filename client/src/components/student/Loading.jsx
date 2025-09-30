@@ -25,7 +25,7 @@ const Loading = () => {
                     </div>
                 </div>
             </div>
-            <p className='text-gray-400 animate-pulse'>Processing...</p>
+            {/* <p className='text-gray-400 animate-pulse'>Processing...</p> */}
         </div>
     )
 }

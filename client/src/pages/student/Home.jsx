@@ -8,6 +8,7 @@ import { RiArrowLeftDoubleLine } from "react-icons/ri";
 import { Link } from 'react-router-dom'
 import Testimonial from '../../components/student/Testimonial'
 import Footer from '../../components/student/Footer'
+import Loading from '../../components/student/Loading'
 
 const Home = () => {
 
@@ -73,7 +74,7 @@ const Home = () => {
                             {/* right shade gradient */}
                             {/* <div className="absolute top-0 right-0 h-full w-30 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" /> */}
                         </div>
-                    ) : "No courses at the moment"}
+                    ) : (<Loading />)}
                 </div>
             </section>
 
@@ -87,7 +88,7 @@ const Home = () => {
                             {allCourses.slice(0, 8).map(course => <CourseCard key={course._id} courseData={course} />).reverse()}
                         </div>
                     </div>
-                ) : "No courses at the moment"}
+                ) : (<Loading />)}
                 {/* expolre button */}
                 <div className=' mt-2 md:mt-10 relative '>
                     <div className='w-full h-[200px] absolute -top-50 left-0 bg-gradient-to-t from-white via-white/80 to-transparent z-10'></div>

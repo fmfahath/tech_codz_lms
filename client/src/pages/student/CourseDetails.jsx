@@ -12,6 +12,7 @@ import humanizeDuration from 'humanize-duration'
 import { TbPlayerPlayFilled } from "react-icons/tb";
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Loading from '../../components/student/Loading';
 
 const CourseDetails = () => {
 
@@ -111,7 +112,7 @@ const CourseDetails = () => {
     }, [courseData, userData])
 
 
-    return (
+    return courseData ? (
         <div className='w-full min-h-screen px-5 md:px-30 pt-[20%] md:pt-[10%] mb-10 bg-gray-50'>
             {/* course heading card */}
             <div className='w-full flex flex-col md:flex-row justify-start gap-5 py-4 px-6 bg-lue rounded-md shadow-lg'>
@@ -207,7 +208,7 @@ const CourseDetails = () => {
                 </div>
             </div>
         </div >
-    )
+    ) : (<Loading />)
 }
 
 export default CourseDetails
