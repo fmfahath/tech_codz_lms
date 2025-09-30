@@ -41,8 +41,8 @@ const Home = () => {
             <Hero />
 
             {/*find course-search bar */}
-            <section className='px-10 md:px-30 py-4 md:py-10'>
-                <div className='flex flex-col md:flex-row items-center justify-start gap-5'>
+            <section className='px-4 md:px-30 py-4 md:py-10'>
+                <div className='flex flex-col md:flex-row items-center md:justify-start gap-5'>
                     <div className='md:max-w-[600px] '>
                         <h1 className='font-roboto text-2xl text-gray-700 md:text-3xl font-medium text-center md:text-start'>Find Your Perfect Course</h1>
                         <p className='font-roboto text-lg md:text-xl font-light text-center md:text-start mx-auto mt-4'>Find the right course to upgrade your skills, enhance your knowledge, and move closer to your personal or professional goals.</p>
