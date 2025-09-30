@@ -47,14 +47,14 @@ const Home = () => {
                         <h1 className='font-roboto text-2xl text-gray-700 md:text-3xl font-medium text-center md:text-start'>Find Your Perfect Course</h1>
                         <p className='font-roboto text-lg md:text-xl font-light text-center md:text-start mx-auto mt-4'>Find the right course to upgrade your skills, enhance your knowledge, and move closer to your personal or professional goals.</p>
                     </div>
-                    <div className='flex-1 block '>
+                    <div className='w-auto md:w-auto flex-1 block'>
                         <SearchBar />
                     </div>
                 </div>
             </section>
 
             {/* popular courses */}
-            <section className='px-10 md:px-30 '>
+            <section className='px-7 md:px-30 '>
                 <div className='bg-gray-50 p-5 rounded-md shadow-lg'>
                     <h2 className='text-xl md:text-2xl font-medium text-gray-700 mt-5'>Popular Courses</h2>
                     {/* <hr className='border border-gray-100' /> */}
