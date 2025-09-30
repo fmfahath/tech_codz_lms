@@ -5,6 +5,13 @@
 This is a **Learning Management System (LMS)** built with the **MERN Stack**.  
 It provides a complete solution for learners and instructors to manage courses online.
 
+<p align="">
+  <a href="https://your-vercel-url.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/🔴 Vercel Live-E53935?style=for-the-badge&logo=vercel&logoColor=white&labelColor=E53935" alt="Vercel Live" style="border-radius:12px;">
+  </a>
+</p>
+
+
 ---
 
 ## 🚀 Features
@@ -96,5 +103,20 @@ cd ../client
 npm run dev
 ```
 ## 📸 Screenshots
+
+### Home Page
+<img width="1900" height="3610" alt="tech-codz-lms-client vercel app_ (1)" src="https://github.com/user-attachments/assets/50989d3c-cd95-40f6-80bd-bf236012fd0d" />
+
+
+### Instructor Dashboard
+<img width="1900" height="1573" alt="tech-codz-lms-client vercel app_ (2)" src="https://github.com/user-attachments/assets/207b4bf6-30cb-4c8e-9890-964e218426ef" />
+<img width="1900" height="1445" alt="tech-codz-lms-client vercel app_ (3)" src="https://github.com/user-attachments/assets/3af48df2-9abd-4f31-89a0-6fbc916749da" />
+<img width="1900" height="1485" alt="tech-codz-lms-client vercel app_ (4)" src="https://github.com/user-attachments/assets/d891b6b9-8dd8-41f3-9466-8016c7824826" />
+
+
+### Student Dashboard
+<img width="1900" height="1409" alt="tech-codz-lms-client vercel app____clerk_handshake=eyJhbGciOiJSUzI1NiIsImNhdCI6ImNsX0I3ZDRQRDExMUFBQSIsImtpZCI6Imluc18zMXNMd3gydmt6QTZmS3dCdllrQnJFb3BWaVciLCJ0eXAiOiJKV1QifQ eyJoYW5kc2hha2UiOlsiX19jbGllbnRfdWF0PTsg" src="https://github.com/user-attachments/assets/1ed2f2e3-10ba-4285-8616-ca4b760ed4d1" />
+<img width="1900" height="1505" alt="tech-codz-lms-client vercel app_player_68da99f75bbfae745f9ec3b0" src="https://github.com/user-attachments/assets/055a40df-09b7-4047-b836-1075f957086b" />
+
 
 
