@@ -189,19 +189,22 @@ export const heroSliderData = [
         title: "Python for Data Science",
         subTitle: "Master Python programming to analyze data, create visualizations, and uncover insights that drive smarter decisions.",
         image: hero2,
-        bgColor: "bg-linear-to-bl from-violet-500 to-fuchsia-500"
+        bgColor: "bg-linear-to-bl from-violet-500 to-fuchsia-500",
+        url: "/course/68dae63ac1dff8aa70d96bad"
     },
     {
         title: "React for Beginners",
         subTitle: "Learn to build dynamic user interfaces and interactive web apps using one of the most popular JavaScript libraries.",
         image: hero1,
-        bgColor: "bg-linear-to-r from-cyan-500 to-blue-500"
+        bgColor: "bg-linear-to-r from-cyan-500 to-blue-500",
+        url: "/course-list"
     },
     {
         title: "AWS Cloud Practitioner",
         subTitle: "Get a foundational understanding of cloud computing and AWS services to start your journey in the cloud industry.",
         image: hero3,
-        bgColor: "bg-linear-to-t from-sky-500 to-indigo-500"
+        bgColor: "bg-linear-to-t from-sky-500 to-indigo-500",
+        url: "/course/68da99f75bbfae745f9ec3b0"
     },
 ]
 

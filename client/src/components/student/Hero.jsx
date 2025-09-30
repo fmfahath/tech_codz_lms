@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { heroSliderData } from '../../assets/assets'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
 const Hero = () => {
 
     const [slideIndex, setSlideIndex] = useState(0)
+    const navigate = useNavigate()
 
-
+    //navigate to url------------------------------
+    const urlNavigate = () => {
+        if (heroSliderData[slideIndex].url) {
+            navigate(heroSliderData[slideIndex].url)
+        }
+    }
 
     useEffect(() => {
 
@@ -65,6 +72,7 @@ const Hero = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 20 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
+                        onClick={urlNavigate}
                     >Enroll Now</motion.button>
                 </AnimatePresence>
                 <AnimatePresence mode='wait'>

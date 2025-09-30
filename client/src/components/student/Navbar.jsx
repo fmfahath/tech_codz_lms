@@ -110,10 +110,10 @@ const Navbar = () => {
                                                     <div className='flex items-center gap-x-4 group/menubox'>
                                                         <div className='bg-white/10 w-fit p-2 rounded-md group-hover/menubox:bg-white 
                                                         group-hover/menubox:text-gray-900 duration-200'>{subMenu?.icon && <subMenu.icon />}</div>
-                                                        <div>
+                                                        <Link to={'/course-list'}>
                                                             <h6 className='font-semibold'>{subMenu?.name}</h6>
                                                             <p className='text-sm text-gray-400'>{subMenu?.desc}</p>
-                                                        </div>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             ))}
