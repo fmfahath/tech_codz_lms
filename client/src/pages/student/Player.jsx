@@ -23,6 +23,7 @@ const Player = () => {
     const [toggle, setToggle] = useState({})
     const [playerData, setPlayerData] = useState(null)
     const [initialRatings, setInitialRatings] = useState(0)
+    const [courseProgressData, setCourseProgressData] = useState(null)
 
     //getCourseDetails----------------------------
     const getCourseDetails = () => {
@@ -38,6 +39,26 @@ const Player = () => {
         })
 
     }
+
+    //get course progress-------------------------
+    const fetchCourseProgressData = async () => {
+        try {
+            const courseId = courseDetails._id
+            const token = await getToken()
+            const { data } = await axios.post(`${backendUrl}/user/get-course-progress`, { courseId }, { headers: { Authorization: `Bearer ${token}` } })
+
+            if (data.success) {
+                setCourseProgressData(data.progressData)
+            }
+            else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+
 
     //ratings--------------------------------------
     const setRatings = async (rating) => {
@@ -81,6 +102,7 @@ const Player = () => {
             if (data.success) {
                 toast.success(data.message)
                 await fetchUserEnrolledCourses()
+                await fetchCourseProgressData()
             }
             else {
                 toast.error(data.message)
@@ -89,6 +111,12 @@ const Player = () => {
             toast.error(error.message)
         }
     }
+
+    useEffect(() => {
+        if (courseDetails) {
+            fetchCourseProgressData()
+        }
+    }, [courseDetails])
 
 
     useEffect(() => {
@@ -115,8 +143,11 @@ const Player = () => {
                                 {chapter.chapterContent.map((lecture, i) => (
                                     <div key={i} className='flex  md:flex-row items-center justify-between gap-5 pl-2 md:pl-5 text-gray-700 mt-2 '>
                                         <div className='md:w-auto flex items-start gap-2 '>
-                                            {/* <IoCheckmarkDoneCircleOutline /> */}
-                                            <IoCheckmarkDoneCircleSharp className='text-blue-500' />
+                                            {courseProgressData && courseProgressData.lectureCompleted.includes(lecture.lectureId) ?
+                                                <IoCheckmarkDoneCircleSharp className='text-blue-500' /> :
+                                                <IoCheckmarkDoneCircleOutline />
+                                            }
+
                                             <p className='w-55 md:min-w-100 truncate'>{lecture.lectureTitle}</p>
                                         </div>
                                         <div className='md:w-[30%] flex items-start justify-end md:justify-start gap-5 '>
