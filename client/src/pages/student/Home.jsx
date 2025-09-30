@@ -48,7 +48,7 @@ const Home = () => {
                         <p className='font-roboto text-lg md:text-xl font-light text-center md:text-start mx-auto mt-4'>Find the right course to upgrade your skills, enhance your knowledge, and move closer to your personal or professional goals.</p>
                     </div>
 
-                    <div className='flex-1 block bg-red-200'>
+                    <div className='flex-1 block'>
                         <SearchBar />
                     </div>
                 </div>
