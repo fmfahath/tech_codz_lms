@@ -14,7 +14,7 @@ const SearchBar = () => {
     }
 
     return (
-        <form className='w-auto my-2 ' onSubmit={handleSubmit}>
+        <form className='max-w-[340px] md:w-auto my-2 ' onSubmit={handleSubmit}>
             <div className='w-auto md:max-w-[500px] flex items-center justify-between gap-2 border border-gray-300 rounded py-1 px-2 mx-auto bg-transparent'>
                 <Search className='text-gray-400' />
                 <input type="text" className='flex-1 outline-0 text-sm md:text-[16px] text-gray-600' placeholder='Search for Courses..' value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
