@@ -6,6 +6,7 @@ import { Line } from 'rc-progress'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import Loading from '../../components/student/Loading'
 
 const MyEnrollments = () => {
 
@@ -85,7 +86,7 @@ const MyEnrollments = () => {
         }
     }, [userData, allCourses])
 
-    return (
+    return enrolledCourseDetails ? (
         <div className='w-full min-h-screen px-4 md:px-30 pt-[30%] md:pt-[10%] mb-10'>
             <div>
                 <h2 className='text-xl md:text-2xl font-medium'>My Enrollments</h2>
@@ -104,12 +105,12 @@ const MyEnrollments = () => {
                                 <tr key={index} className='max-sm:flex max-sm:flex-col  border-b border-gray-300'>
                                     <td className='flex flex-col md:flex-row md:items-center justify-start gap-5 px-4 py-4 md:py-2'>
                                         <img className='md:w-30' src={enrolledCourse.courseThubmnail} alt="course-thumbnail" />
-                                        <div>
+                                        <div className='w-full'>
                                             <p>{enrolledCourse.courseTitle}</p>
                                             <Line
-                                                strokeWidth={3}
+                                                strokeWidth={4}
                                                 percent={enrolledCourse ? (enrolledCourse.completedLectures * 100) / enrolledCourse.totalLectures : 0}
-                                                className='bg-gray-300 rounded-full mt-1'
+                                                className='bg-gray-300 rounded-full mt-1 w-[50%]'
                                             />
                                         </div>
                                     </td>
@@ -124,7 +125,7 @@ const MyEnrollments = () => {
                 </div>
             </div>
         </div>
-    )
+    ) : (<Loading />)
 }
 
 export default MyEnrollments
