@@ -97,6 +97,14 @@ const CourseDetails = () => {
         }
     }
 
+    //get youtube video ID and time----------------------
+    const getYoutubeData = (url) => {
+        const videoId = url.split('/').pop().split('?')[0]
+        const query = new URLSearchParams(url.split('?')[1] || '')
+        const time = query.get('t')
+        return { videoId, time: time ? parseInt(time, 10) : 0 }
+    }
+
     useEffect(() => {
         if (allCourses && allCourses.length > 0) {
             fetchCourseData()
@@ -185,7 +193,10 @@ const CourseDetails = () => {
                                                     <p>{chapterContent.lectureTitle}</p>
                                                 </div>
                                                 <div className='flex gap-4 items-center ml-auto justify-between'>
-                                                    <Link onClick={() => setPlayerData(chapterContent.lectureUrl.split('/').pop())} className='text-blue-500 cursor-pointer italic'>{chapterContent.isPreviewFree && "Preview"}</Link>
+                                                    <Link
+                                                        onClick={() => setPlayerData(getYoutubeData(chapterContent.lectureUrl))}
+                                                        className='text-blue-500 cursor-pointer italic'>{chapterContent.isPreviewFree && "Preview"}
+                                                    </Link>
                                                     <p className='text-gray-700 text-[13px] italic'>{humanizeDuration(chapterContent.lectureDuration * 60 * 1000, { units: ["h", "m"] })}</p>
                                                 </div>
                                             </div>
@@ -198,10 +209,20 @@ const CourseDetails = () => {
                     </div>
                     {/* video player */}
                     <div className=''>
-                        {playerData ? <YouTube videoId={playerData} opts={{ playerVars: { autoplay: 1 } }} iframeClassName='w-full aspect-video' /> :
+                        {playerData ?
+                            <YouTube
+                                videoId={playerData.videoId}
+                                opts={{
+                                    playerVars: {
+                                        autoplay: 1,
+                                        start: playerData.time || 0
+                                    }
+                                }}
+                                iframeClassName='w-full aspect-video'
+                            /> :
                             <div className='flex flex-col items-center justify-center gap-5 bg-black w-full md:min-w-[550px] h-[180px] md:min-h-[250px] text-white'>
                                 <p className='text-center'>CLick the <span className='text-blue-500 italic'>Preview</span> Link to View the Free Lecture Videos</p>
-                                <TbPlayerPlayFilled className='w-10 h-10 md:w-15 md:h-15 bg-blue-500 hover:bg-blue-400 rounded-full p-2 cursor-pointer ' onClick={() => setPlayerData(courseData?.courseContent[0]?.chapterContent[0]?.lectureUrl.split('/').pop())} />
+                                <TbPlayerPlayFilled className='w-10 h-10 md:w-15 md:h-15 bg-blue-500 hover:bg-blue-400 rounded-full p-2 cursor-pointer ' onClick={() => setPlayerData(getYoutubeData(courseData?.courseContent[0]?.chapterContent[0]?.lectureUrl))} />
                             </div>
                         }
                     </div>
